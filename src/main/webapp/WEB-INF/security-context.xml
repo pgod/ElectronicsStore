@@ -10,8 +10,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 		
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/products/add" access="ROLE_ADMIN" />
-		
+		<security:intercept-url pattern="/products/add" access="ROLE_ADMIN" />	
 		<security:form-login login-page="/login" 
                default-target-url="/products/add"   
                authentication-failure-url="/loginfailed"/>

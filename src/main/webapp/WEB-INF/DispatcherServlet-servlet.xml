@@ -10,6 +10,7 @@
 
 	<mvc:annotation-driven enable-matrix-variables="true"/>
 	<context:component-scan base-package="godziszewski.patryk.ElectronicsStore" />
+	<mvc:resources location="/resources/" mapping="/resource/**"/>
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
