@@ -1,8 +1,11 @@
 package godziszewski.patryk.ElectronicsStore.controller;
 
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import godziszewski.patryk.ElectronicsStore.domain.Product;
 import godziszewski.patryk.ElectronicsStore.service.ProductService;
@@ -68,8 +72,8 @@ public class ProductController {
 		return "addProduct";
 	}
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct,
-			BindingResult result)
+	public String processAddNewProductForm(@ModelAttribute("newProduct") Product productToBeAdded,
+			BindingResult result, HttpServletRequest request)
 	{
 		String[] supressedFields = result.getSuppressedFields();
 		if(supressedFields.length>0)
@@ -77,12 +81,24 @@ public class ProductController {
 			throw new RuntimeException("Trial of binding supressed fields: "
 					+StringUtils.arrayToCommaDelimitedString(supressedFields));
 		}
-		productService.addProduct(newProduct);
+		MultipartFile productImage = productToBeAdded.getProductImage();
+		String rootdirectory = request.getServletContext().getRealPath("/");
+		if(productImage != null && !productImage.isEmpty())
+		{
+			try {
+				productImage.transferTo(new File(rootdirectory+"resources\\images\\"
+				+productToBeAdded.getProductId()+".png"));
+			}  catch (Exception e) {
+				throw new RuntimeException("Error occoured while uploading image of the product", e);
+			}
+		}
+		productService.addProduct(productToBeAdded);
 		return "redirect:/products";
 	}
 	@InitBinder 
 	public void initialiseBinder(WebDataBinder binder)
 	{
-		binder.setDisallowedFields("unitsInOrder","discontinued");
+		binder.setAllowedFields("productId","name","unitPrice","description","manufacturer",
+				"category","unitsInStock", "condition","productImage");
 	}
 }
