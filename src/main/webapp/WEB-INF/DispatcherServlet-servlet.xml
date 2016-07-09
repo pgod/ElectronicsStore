@@ -24,5 +24,37 @@
 	<property name="maxUploadSize" value="10240000"/>
 	</bean>
 
-
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json;charset=UTF-8" />
+				<entry key="xml" value="application/xml;charset=UTF-8" />
+				<entry key="html" value="text/html;charset=UTF-8" />
+			</map>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<ref bean="jsonView" />
+				<ref bean="xmlView" />
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
+		<property name="prettyPrint" value="true"/>
+	</bean>
+	
+	
+	<bean id="xmlView" class="org.springframework.web.servlet.view.xml.MarshallingView">
+	<constructor-arg>
+		<bean class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+			<property name="classesToBeBound">
+				<list>
+					<value>godziszewski.patryk.ElectronicsStore.domain.Product</value>
+				</list>
+			</property>
+		</bean>
+	</constructor-arg>
+	</bean>
 </beans>
