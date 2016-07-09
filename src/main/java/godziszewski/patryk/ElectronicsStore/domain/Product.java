@@ -2,8 +2,12 @@ package godziszewski.patryk.ElectronicsStore.domain;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.springframework.web.multipart.MultipartFile;
 
+@XmlRootElement
 public class Product {
 	private String productId;
 	private String name;
@@ -87,6 +91,7 @@ public class Product {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
+	@XmlTransient
 	public MultipartFile getProductImage() {
 		return productImage;
 	}
