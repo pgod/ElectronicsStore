@@ -10,6 +10,7 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 import godziszewski.patryk.ElectronicsStore.domain.Product;
 import godziszewski.patryk.ElectronicsStore.domain.repository.ProductRepository;
+import godziszewski.patryk.ElectronicsStore.exception.ProductNotFoundException;
 
 
 
@@ -61,7 +62,7 @@ public class InMemoryProductRepository implements ProductRepository{
 		}
 		if(productById==null)
 		{
-			throw new IllegalArgumentException("There is no product associated with id: "+productId);
+			throw new ProductNotFoundException(productId);
 		}
 		return productById;
 	}

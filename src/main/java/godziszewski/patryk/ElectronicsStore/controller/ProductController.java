@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import godziszewski.patryk.ElectronicsStore.domain.Product;
+import godziszewski.patryk.ElectronicsStore.exception.NoProductsFoundUnderCategoryException;
+import godziszewski.patryk.ElectronicsStore.exception.ProductNotFoundException;
 import godziszewski.patryk.ElectronicsStore.service.ProductService;
 
 @RequestMapping("/products")
@@ -48,7 +52,12 @@ public class ProductController {
 	public String getProductsByCategory(Model model, @PathVariable("category")
 	String productCategory)
 	{
-		model.addAttribute("products", productService.getProductsByCategory(productCategory));
+		List <Product> products = productService.getProductsByCategory(productCategory);
+		if(products == null || products.isEmpty())
+		{
+			throw new NoProductsFoundUnderCategoryException();
+		}
+		model.addAttribute("products", products);
 		return "products";
 	}
 	@RequestMapping("/filter/{ByCriteria}")
@@ -95,6 +104,18 @@ public class ProductController {
 		productService.addProduct(productToBeAdded);
 		return "redirect:/products";
 	}
+	@ExceptionHandler(ProductNotFoundException.class)
+	public ModelAndView handleError(HttpServletRequest request,
+			ProductNotFoundException exception)
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("invalidProductId", exception.getProductId());
+		mav.addObject("exception", exception);
+		mav.addObject("url", request.getRequestURI()+"?"+request.getQueryString());
+		mav.setViewName("productNotFound");
+		return mav;
+	}
+	
 	@InitBinder 
 	public void initialiseBinder(WebDataBinder binder)
 	{
