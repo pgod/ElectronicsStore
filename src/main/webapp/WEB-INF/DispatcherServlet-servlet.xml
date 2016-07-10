@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 
-	<mvc:annotation-driven enable-matrix-variables="true"/>
+	<mvc:annotation-driven enable-matrix-variables="true" validator="validator" />
 	<context:component-scan base-package="godziszewski.patryk.ElectronicsStore" />
 	<mvc:resources location="/resources/" mapping="/resource/**"/>
 	
@@ -57,4 +57,9 @@
 		</bean>
 	</constructor-arg>
 	</bean>
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean>
+	
 </beans>
