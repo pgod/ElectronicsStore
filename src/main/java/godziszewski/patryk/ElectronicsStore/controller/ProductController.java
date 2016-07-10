@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,9 +82,13 @@ public class ProductController {
 		return "addProduct";
 	}
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("newProduct") Product productToBeAdded,
+	public String processAddNewProductForm(@ModelAttribute("newProduct") @Valid Product productToBeAdded,
 			BindingResult result, HttpServletRequest request)
 	{
+		if(result.hasErrors())
+		{
+			return "addProduct";
+		}
 		String[] supressedFields = result.getSuppressedFields();
 		if(supressedFields.length>0)
 		{
