@@ -13,9 +13,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
+import godziszewski.patryk.ElectronicsStore.validator.Category;
 import godziszewski.patryk.ElectronicsStore.validator.ProductId;
-
-
 
 @XmlRootElement
 public class Product {
@@ -32,6 +31,7 @@ public class Product {
 	private String manufacturer;
 	@NotNull(message = "{NotNull.Product.category.validation}")
 	@Length(min = 1, max = 20, message = "{Length.Product.category.validation}")
+	@Category
 	private String category;
 	@Min(value = 0, message = "{Min.Product.UnitsInStock.validation}")
 	private long unitsInStock;
