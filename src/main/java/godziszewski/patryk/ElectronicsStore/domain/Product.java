@@ -1,5 +1,6 @@
 package godziszewski.patryk.ElectronicsStore.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.Digits;
@@ -17,7 +18,8 @@ import godziszewski.patryk.ElectronicsStore.validator.Category;
 import godziszewski.patryk.ElectronicsStore.validator.ProductId;
 
 @XmlRootElement
-public class Product {
+public class Product implements Serializable{
+	private static final long serialVersionUID = -7013955470939575675L;
 	@Pattern(regexp = "P[0-9]+", message ="{Pattern.Product.productId.validation}")
 	@ProductId
 	private String productId;
