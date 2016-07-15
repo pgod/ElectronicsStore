@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import godziszewski.patryk.ElectronicsStore.domain.Cart;
 import godziszewski.patryk.ElectronicsStore.domain.repository.CartRepository;
+import godziszewski.patryk.ElectronicsStore.exception.InvalidCartException;
 import godziszewski.patryk.ElectronicsStore.service.CartService;
 
 @Service
@@ -26,5 +27,13 @@ public class CartServiceImpl implements CartService {
 
 	public void delete(String cartId) {
 		cartRepository.delete(cartId);
+	}
+
+	public Cart validate(String cartId) {
+		Cart cart = cartRepository.read(cartId);
+		if(cart==null || cart.getCartItems().size()==0) {
+		throw new InvalidCartException(cartId);
+		}
+		return cart;
 	}
 }
