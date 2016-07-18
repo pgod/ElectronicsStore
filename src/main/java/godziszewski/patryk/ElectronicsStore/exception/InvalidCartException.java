@@ -1,6 +1,6 @@
 package godziszewski.patryk.ElectronicsStore.exception;
 
-import java.io.Serializable;
+
 
 public class InvalidCartException extends RuntimeException {
 	private static final long serialVersionUID = -238377124985427627L;

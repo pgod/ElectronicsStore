@@ -11,6 +11,7 @@ public class CartItem implements Serializable {
 	public CartItem()
 	{
 		super();
+		this.quantity = 1;
 	}
 	public CartItem(Product product) {
 		super();

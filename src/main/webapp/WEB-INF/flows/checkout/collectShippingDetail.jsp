@@ -93,7 +93,7 @@
 						<button id="back" class="btn btn-default" name="_eventId_backToCollectCustomerInfo">back</button>
 						
 						<input type="submit" id="btnAdd" class="btn btn-primary"
-							value="Dodaj"  name="_eventId_shippingDetailCollected"/>
+							value="Submit"  name="_eventId_shippingDetailCollected"/>
 						<button id="btnCancel" class="btn btn-default" name="_eventId_cancel">Cancel</button>
 					</div>
 				</div>
