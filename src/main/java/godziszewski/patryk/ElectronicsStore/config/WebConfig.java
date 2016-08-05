@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.context.MessageSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 
 import godziszewski.patryk.ElectronicsStore.domain.Product;
@@ -102,14 +102,15 @@ public ContentNegotiatingViewResolver contentResolver()
 	listOfViews.add(xmlView());
 	
 	cn.setDefaultViews(listOfViews);
-	cn.setMediaTypes(mediaTypesMap);
+	
+	//cn.setMediaTypes(mediaTypesMap);
 	return cn;
 }
 
 @Bean
-public MappingJacksonJsonView jsonView()
+public MappingJackson2JsonView jsonView()
 {
-	MappingJacksonJsonView mj= new MappingJacksonJsonView();
+	MappingJackson2JsonView mj= new MappingJackson2JsonView();
 	mj.setPrettyPrint(true);
 	return mj;
 }
