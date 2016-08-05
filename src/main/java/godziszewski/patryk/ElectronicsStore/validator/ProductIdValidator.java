@@ -14,6 +14,8 @@ import godziszewski.patryk.ElectronicsStore.service.ProductService;
 public class ProductIdValidator implements ConstraintValidator<ProductId,String> {
 	@Autowired
 	private ProductService productService;
+	
+	
 	public void initialize(ProductId constraingAnnotation)
 	{
 		
