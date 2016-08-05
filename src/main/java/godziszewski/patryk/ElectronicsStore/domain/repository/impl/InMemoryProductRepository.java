@@ -79,7 +79,7 @@ public class InMemoryProductRepository implements ProductRepository{
 		return productsByCategory;
 	}
 
-	public Set<Product> getProductsByFilter(Map<String, List<String>> filterParams) {
+	public List<Product> getProductsByFilter(Map<String, List<String>> filterParams) {
 		Set <Product> productsByBrand = new HashSet<Product>();
 		Set <Product> productsByCategory = new HashSet<Product>();
 		Set <String> criterias = filterParams.keySet();
@@ -104,7 +104,14 @@ public class InMemoryProductRepository implements ProductRepository{
 			}
 		}
 		productsByCategory.retainAll(productsByBrand);
-		return productsByCategory;
+		
+		List<Product> result = new ArrayList<Product>();
+		for(Product product : productsByCategory)
+		{
+			result.add(product);
+		}
+		
+		return result;
 	}
 
 	public void addProduct(Product product) {

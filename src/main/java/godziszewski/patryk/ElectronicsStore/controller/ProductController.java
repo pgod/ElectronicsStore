@@ -34,19 +34,18 @@ import godziszewski.patryk.ElectronicsStore.service.ProductService;
 @Controller
 public class ProductController {
 	
-	@Autowired
+	
 	private ProductService productService;
 	
+	
+	@Autowired
+	public ProductController(ProductService productService) {
+		this.productService = productService;
+	}
 	@RequestMapping
 	public String list(Model model)
 	{
 		model.addAttribute("products",productService.getAllProducts());
-		return "products";
-	}
-	@RequestMapping("/all")
-	public String allProducts(Model model)
-	{
-		model.addAttribute("products", productService.getAllProducts());
 		return "products";
 	}
 	@RequestMapping("/{category}")
@@ -65,6 +64,7 @@ public class ProductController {
 	public String getProductsByFilter(Model model, @MatrixVariable(pathVar="ByCriteria")
 	Map <String, List<String>> filterParams)
 	{
+		
 		model.addAttribute("products", productService.getProductsByFilter(filterParams));
 		return "products";
 	}

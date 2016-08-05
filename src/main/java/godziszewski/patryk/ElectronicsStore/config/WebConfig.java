@@ -1,9 +1,8 @@
 package godziszewski.patryk.ElectronicsStore.config;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 
 import org.springframework.context.annotation.Bean;
@@ -18,13 +17,15 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.xml.MarshallingView;
+import org.springframework.web.util.UrlPathHelper;
 
 import godziszewski.patryk.ElectronicsStore.domain.Product;
 
@@ -42,14 +43,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	return resolver;
 	}
 	
-	//enabling matrix variables
-	@Bean
-	public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-	     RequestMappingHandlerMapping requestMappingHandlerMapping = new RequestMappingHandlerMapping();
-	    requestMappingHandlerMapping.setRemoveSemicolonContent(false); 
-	    
-	    return requestMappingHandlerMapping;
-	}
+	 @Override
+	    public void configurePathMatch(PathMatchConfigurer configurer) {
+
+	        UrlPathHelper urlPathHelper = new UrlPathHelper();
+	        urlPathHelper.setRemoveSemicolonContent(false);
+
+	        configurer.setUrlPathHelper(urlPathHelper);
+	    }
 	
 	
 	@Override
@@ -85,25 +86,19 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return cm;
 	}
 
-
 @Bean
 public ContentNegotiatingViewResolver contentResolver()
 {
 	ContentNegotiatingViewResolver cn = new ContentNegotiatingViewResolver();
-	Map<String,String> mediaTypesMap = new HashMap<String,String>();
 	
-	
-	mediaTypesMap.put("json", "application/json;charset=UTF-8");
-	mediaTypesMap.put("xml", "application/xml;charset=UTF-8");
-	mediaTypesMap.put("html", "text/html;charset=UTF-8");
 	
 	List<View> listOfViews = new ArrayList<View>();
 	listOfViews.add(jsonView());
 	listOfViews.add(xmlView());
 	
 	cn.setDefaultViews(listOfViews);
-	
-	//cn.setMediaTypes(mediaTypesMap);
+
+
 	return cn;
 }
 
