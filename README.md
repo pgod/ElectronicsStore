@@ -1,6 +1,6 @@
 # ElectronicsStore
 
-Basic and neat webstore, created with Spring Mvc.
+Basic and neat webstore, created with Spring MVC.
 Technologies used:
 - Spring
 - Spring MVC
