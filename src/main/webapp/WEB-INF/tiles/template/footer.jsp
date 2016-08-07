@@ -1,0 +1,1 @@
+<p>&copy; Author: Patryk Godziszewski</p>

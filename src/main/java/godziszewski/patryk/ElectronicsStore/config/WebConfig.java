@@ -23,7 +23,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.UrlPathHelper;
 
@@ -69,6 +72,25 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 	    registry.addResourceHandler("/resource/**").addResourceLocations("/resources/");
+	}
+	@Bean
+	TilesConfigurer tilesConfigurer()
+	{
+		TilesConfigurer tiles = new TilesConfigurer();
+		tiles.setDefinitions(new String[] {
+				"/WEB-INF/tiles/definition/tile-definition.xml"
+		});
+		tiles.setCheckRefresh(true);
+		return tiles;
+	}
+	
+	@Bean
+	public ViewResolver tilesViewResolver() {
+	UrlBasedViewResolver ubv = new UrlBasedViewResolver();
+	ubv.setViewClass(TilesView.class);
+	ubv.setOrder(-2);
+	return ubv;
+	//return new TilesViewResolver();
 	}
 	@Bean
 	public ResourceBundleMessageSource messageSource()

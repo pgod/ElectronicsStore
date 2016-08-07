@@ -115,6 +115,17 @@
     <artifactId>mockito-all</artifactId>
     <version>1.10.19</version>
 </dependency>
+<dependency>
+    <groupId>org.apache.tiles</groupId>
+    <artifactId>tiles-core</artifactId>
+    <version>3.0.5</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.tiles</groupId>
+    <artifactId>tiles-jsp</artifactId>
+    <version>3.0.5</version>
+</dependency>
   	
   </dependencies>
   <properties>
