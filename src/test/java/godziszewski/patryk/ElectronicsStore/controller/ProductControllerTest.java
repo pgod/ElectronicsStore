@@ -29,12 +29,12 @@ public class ProductControllerTest {
 	@Test
 	public void testProductsPage() throws Exception
 	{
-		ProductService mockRepository = mock(ProductService.class);
+		ProductService mockService = mock(ProductService.class);
 		List<Product> listOfProducts = createProductList(10);
-		when(mockRepository.getAllProducts()) 
+		when(mockService.getAllProducts()) 
 		.thenReturn(listOfProducts);
 		
-		ProductController controller = new ProductController(mockRepository);
+		ProductController controller = new ProductController(mockService);
 		MockMvc mockMvc = standaloneSetup(controller)
 				.setSingleView(new InternalResourceView("/WEB-INF/views/products.jsp"))
 				.build();
@@ -47,7 +47,7 @@ public class ProductControllerTest {
 	@Test
 	public void testSearchingByCategory() throws Exception
 	{
-		ProductService mockRepository = mock(ProductService.class);
+		ProductService mockService = mock(ProductService.class);
 		List<Product> listOfProducts = new ArrayList<Product>();
 		
 		
@@ -56,11 +56,11 @@ public class ProductControllerTest {
 		listOfProducts.add(dell);
 		
 		
-		when(mockRepository.getProductsByCategory("laptop")) 
+		when(mockService.getProductsByCategory("laptop")) 
 		.thenReturn(listOfProducts);
 		
 		
-		ProductController controller = new ProductController(mockRepository);
+		ProductController controller = new ProductController(mockService);
 		MockMvc mockMvc = standaloneSetup(controller)
 				.setSingleView(new InternalResourceView("/WEB-INF/views/products.jsp"))
 				.build();
@@ -74,7 +74,7 @@ public class ProductControllerTest {
 	@Test
 	public void testSearchingByCriteria() throws Exception
 	{
-		ProductService mockRepository = mock(ProductService.class);
+		ProductService mockService = mock(ProductService.class);
 		List<Product> listOfProducts = new ArrayList<Product>();
 		
 		
@@ -94,11 +94,11 @@ public class ProductControllerTest {
 		category.add("laptop");
 		filterParams.put("category", category);
 		
-		when(mockRepository.getProductsByFilter(filterParams)) 
+		when(mockService.getProductsByFilter(filterParams)) 
 		.thenReturn(listOfProducts);
 		
 		
-		ProductController controller = new ProductController(mockRepository);
+		ProductController controller = new ProductController(mockService);
 		MockMvc mockMvc = standaloneSetup(controller)
 				.setSingleView(new InternalResourceView("/WEB-INF/views/products.jsp"))
 				.setRemoveSemicolonContent(false)
@@ -114,16 +114,16 @@ public class ProductControllerTest {
 	@Test
 	public void testSearchingById() throws Exception
 	{
-		ProductService mockRepository = mock(ProductService.class);
+		ProductService mockService = mock(ProductService.class);
 		Product dell = new Product("P1234","Dell Inspiron", new BigDecimal("1500"));
 		List<Product> pr = new ArrayList<Product>();
 		pr.add(dell);
 	
-		when(mockRepository.getProductById("P1234"))
+		when(mockService.getProductById("P1234"))
 		.thenReturn(dell);
 		
 		
-		ProductController controller = new ProductController(mockRepository);
+		ProductController controller = new ProductController(mockService);
 		MockMvc mockMvc = standaloneSetup(controller)
 				.setSingleView(new InternalResourceView("/WEB-INF/views/product.jsp"))
 				.build();
@@ -137,8 +137,8 @@ public class ProductControllerTest {
 	}
 	@Test
 	  public void testShowNewProductForm() throws Exception {
-		ProductService mockRepository = mock(ProductService.class);
-		ProductController controller = new ProductController(mockRepository);
+		ProductService mockService = mock(ProductService.class);
+		ProductController controller = new ProductController(mockService);
 		
 	    MockMvc mockMvc = standaloneSetup(controller).build();
 	    mockMvc.perform(get("/products/add"))
@@ -147,11 +147,11 @@ public class ProductControllerTest {
 	 @Test
 	  public void testProcessNewProductForm() throws Exception {
 	    
-		 ProductService mockRepository = mock(ProductService.class);
+		 ProductService mockService = mock(ProductService.class);
 		 
 		 
 		 
-		 ProductController controller = new ProductController(mockRepository);
+		 ProductController controller = new ProductController(mockService);
 		 Product product = new Product("P1234", "Dell Inspiron", new BigDecimal("1500"));
 		 product.setCategory("laptop");
 		 product.setManufacturer("dell");
@@ -172,12 +172,13 @@ public class ProductControllerTest {
 	    		.param("unitsInStock", "100"))
 	    		.andExpect(redirectedUrl("/products"));
 	    
-	    verify(mockRepository, atLeastOnce()).addProduct(product);
+	    verify(mockService, atLeastOnce()).addProduct(product);
 	  }
 
 	private List<Product> createProductList(int count) {
 		List<Product> products = new ArrayList<Product>();
 		for (int i=0; i < count; i++) {
+			products.add(new Product());
 		}
 		return products;
 		}

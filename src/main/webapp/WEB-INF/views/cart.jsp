@@ -13,43 +13,30 @@
 
 <title>Cart</title>
 </head>
-<body>
-	<section>
-		<div class="jumbotron">
-			<div class="container">
-				<h1>Cart</h1>
-				<p>Products in your cart</p>
-			</div>
-		</div>
-	</section>
-
 	<section class="container" ng-app="cartApp">
 		<div ng-controller="cartCtrl" ng-init="initCartId('${cartId}')">
 
 			<div>
 				<a class="btn btn-danger pull-left"
 					ng-click="clearCart()"> <span
-					class="glyphicon glyphicon-remove-sign"></span> erase cart
-				</a> 
-				<a href= "<spring:url value="/checkout?cartId=${cartId}"/>" class="btn btn-success pull-right">
-				<span class="glyphicon-shopping-cart glyphicon"></span> Buy
-					</a>
+					class="glyphicon glyphicon-remove-sign"></span> Erase Cart
+				</a> <a href="<spring:url value="/checkout?cartId=${cartId}"/>" class="btn btn-success pull-right"> <span
+					class="glyphicon-shopping-cart glyphicon"></span> Confirm
+				</a>
 			</div>
 			<table class="table table-hover">
 				<tr>
 					<th>Product</th>
-          <th>Unit price</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Action</th>
-
+                    <th>Unit price</th>
+                    <th>Quantity</th>
+                    <th>Total price</th>
+                    <th>Action</th>
 				</tr>
 				<tr ng-repeat="item in cart.cartItems">
 					<td>{{item.product.productId}}-{{item.product.name}}</td>
-					<td>{{item.product.unitPrice}} PLN
-					</td>
+					<td>{{item.product.unitPrice}}</td>
 					<td>{{item.quantity}}</td>
-					<td>{{item.totalPrice}} PLN</td>
+					<td>{{item.totalPrice}}</td>
 					<td><a href="#" class="label label-danger" ng-click="removeFromCart(item.product.productId)"> <span
 							class="glyphicon glyphicon-remove" /></span> Delete
 					</a></td>
@@ -57,16 +44,15 @@
 				<tr>
 					<th></th>
 					<th></th>
-					<th>Total price</th>
+					<th>Total</th>
 					<th>{{cart.grandTotal}} PLN</th>
 					<th></th>
 				</tr>
 			</table>
 			
 			<a href="<spring:url value="/products" />" class="btn btn-default">
-						<span class="glyphicon-hand-left glyphicon"></span> Go back to shopping
+						<span class="glyphicon-hand-left glyphicon"></span> Continue shopping
 			</a>
 		</div>
 	</section>
-</body>
 </html>
