@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.webflow.config.AbstractFlowConfiguration;
 import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
 import org.springframework.webflow.executor.FlowExecutor;
+import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
+import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 
 
 @Configuration
@@ -22,18 +24,8 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 	public FlowExecutor flowExecutor() {
 	    return getFlowExecutorBuilder(flowRegistry()).build();
 	}
-	
 
-	/*
-	 * <bean id="flowHandlerMapping" class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
-		<property name="flowRegistry" ref="flowRegistry" />
-	</bean>
-	<bean id="flowHandlerAdapter" class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
-		<property name="flowExecutor" ref="flowExecutor" />
-	</bean>
-	
-	 */
-	/*@Bean
+	@Bean
 	public FlowHandlerMapping flowHandlerMapping()
 	{
 		FlowHandlerMapping fh = new FlowHandlerMapping();
@@ -46,5 +38,5 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 		FlowHandlerAdapter fh = new FlowHandlerAdapter();
 		fh.setFlowExecutor(flowExecutor());
 		return fh;
-	}*/
+	}
 }
