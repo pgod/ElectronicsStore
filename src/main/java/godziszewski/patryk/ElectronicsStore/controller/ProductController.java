@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -100,8 +101,8 @@ public class ProductController {
 		if(productImage != null && !productImage.isEmpty())
 		{
 			try {
-				productImage.transferTo(new File(rootdirectory+"resources\\images\\"
-				+productToBeAdded.getProductId()+".png"));
+				FileCopyUtils.copy(productImage.getBytes(), 
+						new File( rootdirectory + "resources\\images\\"+productToBeAdded.getProductId()+".png"));
 			}  catch (Exception e) {
 				throw new RuntimeException("Error occoured while uploading image of the product", e);
 			}
@@ -109,17 +110,7 @@ public class ProductController {
 		productService.addProduct(productToBeAdded);
 		return "redirect:/products";
 	}
-	@ExceptionHandler(ProductNotFoundException.class)
-	public ModelAndView handleError(HttpServletRequest request,
-			ProductNotFoundException exception)
-	{
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("invalidProductId", exception.getProductId());
-		mav.addObject("exception", exception);
-		mav.addObject("url", request.getRequestURI()+"?"+request.getQueryString());
-		mav.setViewName("productNotFound");
-		return mav;
-	}
+
 	
 	@InitBinder 
 	public void initialiseBinder(WebDataBinder binder)

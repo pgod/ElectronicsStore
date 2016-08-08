@@ -40,8 +40,8 @@
   	</dependency>
   	<dependency>
   		<groupId>org.springframework.security</groupId>
-  		<artifactId>spring-security-config</artifactId>
-  		<version>3.1.4.RELEASE</version>
+    <artifactId>spring-security-core</artifactId>
+    <version>4.1.1.RELEASE</version>
   		<exclusions>
   			<exclusion>
   				<artifactId>spring-asm</artifactId>
@@ -50,15 +50,15 @@
   		</exclusions>
   	</dependency>
   	<dependency>
-  		<groupId>org.springframework.security</groupId>
-  		<artifactId>spring-security-web</artifactId>
-  		<version>3.1.4.RELEASE</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>commons-fileupload</groupId>
-  		<artifactId>commons-fileupload</artifactId>
-  		<version>1.2.2</version>
-  	</dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-web</artifactId>
+    <version>4.1.1.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-config</artifactId>
+    <version>4.1.1.RELEASE</version>
+</dependency>
   	<dependency>
   		<groupId>commons-io</groupId>
   		<artifactId>commons-io</artifactId>

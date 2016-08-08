@@ -13,20 +13,18 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
-import org.springframework.web.servlet.view.tiles3.TilesView;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.UrlPathHelper;
 
@@ -86,11 +84,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public ViewResolver tilesViewResolver() {
-	UrlBasedViewResolver ubv = new UrlBasedViewResolver();
-	ubv.setViewClass(TilesView.class);
-	ubv.setOrder(-2);
-	return ubv;
-	//return new TilesViewResolver();
+		TilesViewResolver tv = new TilesViewResolver();
+		tv.setOrder(-2);
+		return  tv;
 	}
 	@Bean
 	public ResourceBundleMessageSource messageSource()
@@ -99,15 +95,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		rb.setBasename("messages");
 		return rb;
 	}
-	
 	@Bean
-	public CommonsMultipartResolver multipartResolver()
+	public StandardServletMultipartResolver multipartResolver()
 	{
-		CommonsMultipartResolver cm = new CommonsMultipartResolver();
-		cm.setMaxUploadSize(10240000);
-		return cm;
+		return new StandardServletMultipartResolver();
 	}
-
 @Bean
 public ContentNegotiatingViewResolver contentResolver()
 {
