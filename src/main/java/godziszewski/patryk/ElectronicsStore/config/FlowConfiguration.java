@@ -17,7 +17,7 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 	public FlowDefinitionRegistry flowRegistry() {
 	    return getFlowDefinitionRegistryBuilder()
 	        .setBasePath("/WEB-INF/flows")
-	        .addFlowLocation("/checkout/checkout-flow.xml","checkout")
+	        .addFlowLocationPattern("/**/*-flow.xml")
 	        .build();
 	}
 	@Bean
