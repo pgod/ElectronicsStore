@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/webflow
-							http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+  http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<var name="order" class="godziszewski.patryk.ElectronicsStore.domain.Order" />
 
@@ -11,17 +11,18 @@
 			result="order.cart" />
 		<transition to="InvalidCartWarning"
 			on-exception="godziszewski.patryk.ElectronicsStore.exception.InvalidCartException" />
-		<transition to="collectCustomerInfo" />
+		<transition to="customer" />
 	</action-state>
 
-	<view-state id="collectCustomerInfo" view="collectCustomerInfo.jsp" model="order">
-		<transition on="customerInfoCollected" to="orderConfirmation" />
-	</view-state>
+	<subflow-state id="customer" subflow="checkout/customer">
+      <input name="order" value="order"/>
+      <transition on="customerReady" to="orderConfirmation" />
+    </subflow-state>
 
 
 	<view-state id="orderConfirmation">
 		<transition on="orderConfirmed" to="processOrder" />
-		<transition on="backToCustomerInfo" to="collectCustomerInfo" />
+		<transition on="backToCustomerInfo" to="customer" />
 	</view-state>
 	
 	<action-state id="processOrder">

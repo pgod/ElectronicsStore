@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/webflow 
+  http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+					
+	<input name="order" required="true"/>	
+		
+	<view-state id="collectCustomerInfo" view="collectCustomerInfo.jsp" model="order">
+		<transition on="customerInfoCollected" to="customerReady" />
+		<transition on="cancel" to="cancel"/>
+	</view-state>
+	
+	<end-state id="cancel" />
+    <end-state id="customerReady" />
+	
+</flow>
