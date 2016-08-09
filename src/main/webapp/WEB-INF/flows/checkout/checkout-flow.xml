@@ -15,17 +15,13 @@
 	</action-state>
 
 	<view-state id="collectCustomerInfo" view="collectCustomerInfo.jsp" model="order">
-		<transition on="customerInfoCollected" to="collectShippingDetail" />
+		<transition on="customerInfoCollected" to="orderConfirmation" />
 	</view-state>
 
-	<view-state id="collectShippingDetail" model="order">
-		<transition on="shippingDetailCollected" to="orderConfirmation" />
-		<transition on="backToCollectCustomerInfo" to="collectCustomerInfo" />
-	</view-state>
 
 	<view-state id="orderConfirmation">
 		<transition on="orderConfirmed" to="processOrder" />
-		<transition on="backToCollectShippingDetail" to="collectShippingDetail" />
+		<transition on="backToCustomerInfo" to="collectCustomerInfo" />
 	</view-state>
 	
 	<action-state id="processOrder">
@@ -46,7 +42,7 @@
 	<end-state id="cancelCheckout" view = "checkOutCancelled.jsp"/>		
 	
 	<global-transitions>
-		<transition on = "cancel" to="endState" />
+		<transition on = "cancel" to="cancelCheckout" />
 	</global-transitions>
 
 </flow>

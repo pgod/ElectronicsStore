@@ -34,26 +34,7 @@
 					<div class="text-center">
 						<h1>Summary</h1>
 					</div>
-					<div class="row">
-						<div class="col-xs-6 col-sm-6 col-md-6">
-							<address>
-								<strong>Shipping details</strong> <br>
-								${order.shippingDetail.name}<br>
-								${order.shippingDetail.shippingAddress.streetName} ${order.shippingDetail.shippingAddress.doorNo}
-								<br>
-								${order.shippingDetail.shippingAddress.zipCode} ${order.shippingDetail.shippingAddress.areaName}
-								<br>
-								${order.shippingDetail.shippingAddress.state}, ${order.shippingDetail.shippingAddress.country}
-								<br>
-							</address>
-						</div>
-						<div class="col-xs-6 col-sm-6 col-md-6 text-right">
-							<p>
-								<em>Shipping Date: <fmt:formatDate type="date"
-										value="${order.shippingDetail.shippingDate}" pattern="dd.MM.yyyy" /></em>
-							</p>
-						</div>
-					</div>
+					
 					<div class="row">
 						<div class="col-xs-6 col-sm-6 col-md-6">
 							<address>
@@ -105,7 +86,7 @@
 							</tbody>
 						</table>
 						<button id="back" class="btn btn-default"
-							name="_eventId_backToCollectShippingDetail">back</button>
+							name="_eventId_backToCustomerInfo">back</button>
 
 						<button type="submit" class="btn btn-success"
 							name="_eventId_orderConfirmed">
