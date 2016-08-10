@@ -21,6 +21,6 @@ public class LoginController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model)
 	{
-		return "login";
+		return "redirect:/products";
 	}
 }

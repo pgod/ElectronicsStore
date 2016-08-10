@@ -3,6 +3,7 @@ package godziszewski.patryk.ElectronicsStore.config;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 excludeFilters={
 @Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)
 })
+@Import(godziszewski.patryk.ElectronicsStore.config.WebSecurityConfig.class)
 public class RootConfig {
 
 }

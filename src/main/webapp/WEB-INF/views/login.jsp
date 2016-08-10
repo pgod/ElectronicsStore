@@ -23,15 +23,18 @@
 						<spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/><br />
 					</div>
 				</c:if>
-			    	<form action="<c:url value="/j_spring_security_check"></c:url>" method="post">
+			    	<form action="<c:url value="/login"></c:url>" method="post">
                     <fieldset>
 			    	  	<div class="form-group">
-			    		    <input class="form-control" placeholder="User name" name='j_username' type="text">
+			    		    <input class="form-control" placeholder="User name" name='username' type="text">
 			    		</div>
 			    		<div class="form-group">
-			    			<input class="form-control" placeholder="Password" name='j_password'  type="password" value="">
+			    			<input class="form-control" placeholder="Password" name='password'  type="password" value="">
 			    		</div>
+			    		<input id="remember_me" name="remember-me" type="checkbox"/>
+						<label for="remember_me" class="inline">Remember me</label>
 			    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Log in">
+			    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			    	</fieldset>
 			      	</form>
 			    </div>
