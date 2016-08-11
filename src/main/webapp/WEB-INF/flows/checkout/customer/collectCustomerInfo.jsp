@@ -24,81 +24,92 @@
 				<legend>Customer Details</legend>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="customerId" >Customer Id</label>
+					<label class="control-label col-lg-2" for="name"><spring:message code="editCustomer.form.name.label"/></label>
 					<div class="col-lg-10">
-						<form:input id="customerId" path="customerId" type="text" class="form:input-large" />
-					</div>
-				</div>
-	
-				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="surname" >Surname</label>
-					<div class="col-lg-10">
-						<form:input id="surname" path="surname" type="text" class="form:input-large" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="control-label col-lg-2" for="name">Name</label>
-					<div class="col-lg-10">
-						<form:input id="name" path="name" type="text" class="form:input-large" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="control-label col-lg-2" for="doorNo">Door No</label>
-					<div class="col-lg-10">
-						<form:input id="doorNo" path="billingAddress.doorNo" type="text"
-							class="form:input-large" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="control-label col-lg-2" for="streetName">Street Name</label>
-					<div class="col-lg-10">
-						<form:input id="streetName" path="billingAddress.streetName." type="text"
-							class="form:input-large" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="control-label col-lg-2" for="areaName">Area Name</label>
-					<div class="col-lg-10">
-						<form:input id="areaName" path="billingAddress.areaName" type="text"
-							class="form:input-large" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="control-label col-lg-2" for="state">State</label>
-					<div class="col-lg-10">
-						<form:input id="state" path="billingAddress.state" type="text"
-							class="form:input-large" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="control-label col-lg-2" for="country">Country</label>
-					<div class="col-lg-10">
-						<form:input id="country" path="billingAddress.country" type="text"
-							class="form:input-large" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="control-label col-lg-2" for="zipCode">Zip Code</label>
-					<div class="col-lg-10">
-						<form:input id="zipCode" path="billingAddress.zipCode" type="text"
-							class="form:input-large" />
+						<form:input id="name" path="name" type="text" class="form:input-large"/>
+						<form:errors path="name" cssClass="text-danger"/>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="phoneNumber">Phone Number</label>
+					<label class="control-label col-lg-2" for="surname"><spring:message code="editCustomer.form.surname.label"/></label>
 					<div class="col-lg-10">
-						<form:input id="phoneNumber" path="phoneNumber" type="text"
-							class="form:input-large" />
+						<form:input id="surname" path="surname" type="text" class="form:input-large"/>
+						<form:errors path="surname" cssClass="text-danger"/>
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="billingAddress.streetName"><spring:message code="editCustomer.form.streetName.label"/></label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="billingAddress.streetName" path="billingAddress.streetName" type="text" class="form:input-large"/>
+							<form:errors path="billingAddress.streetName" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="billingAddress.doorNo"><spring:message code="editCustomer.form.doorNo.label"/></label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="billingAddress.doorNo" path="billingAddress.doorNo" type="text" class="form:input-large"/>
+							<form:errors path="billingAddress.doorNo" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="billingAddress.zipCode"><spring:message code="editCustomer.form.zipCode.label"/></label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="billingAddress.zipCode" path="billingAddress.zipCode" type="text" class="form:input-large"/>
+							<form:errors path="billingAddress.zipCode" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="billingAddress.areaName"><spring:message code="editCustomer.form.areaName.label"/></label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="billingAddress.areaName" path="billingAddress.areaName" type="text" class="form:input-large"/>
+							<form:errors path="billingAddress.areaName" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="billingAddress.state"><spring:message code="editCustomer.form.state.label"/></label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="billingAddress.state" path="billingAddress.state" type="text" class="form:input-large"/>
+							<form:errors path="billingAddress.state" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="billingAddress.country"><spring:message code="editCustomer.form.country.label"/></label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="billingAddress.country" path="billingAddress.country" type="text" class="form:input-large"/>
+							<form:errors path="billingAddress.country" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="phoneNumber"><spring:message code="editCustomer.form.phoneNumber.label"/></label>
+					<div class="col-lg-10">
+						<div class="form:input-prepend">
+							<form:input id="phoneNumber" path="phoneNumber" type="text" class="form:input-large"/>
+							<form:errors path="phoneNumber" cssClass="text-danger"/>
+						</div>
+					</div>
+				</div>
+				
+				
 
 				<input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
 				

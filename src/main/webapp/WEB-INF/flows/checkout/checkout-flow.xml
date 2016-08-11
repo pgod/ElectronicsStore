@@ -11,8 +11,17 @@
 			result="order.cart" />
 		<transition to="InvalidCartWarning"
 			on-exception="godziszewski.patryk.ElectronicsStore.exception.InvalidCartException" />
-		<transition to="customer" />
+		<transition to="loadCustomerAddress" />
 	</action-state>
+	
+		<action-state id="loadCustomerAddress">
+		<evaluate expression="customerServiceImpl.getCustomerByEmail(currentUser.name)"
+			result="order.customer" />
+			<transition to="customer"
+			on-exception="org.springframework.expression.spel.SpelEvaluationException"/>
+			<transition to="customer" />
+		</action-state>
+	
 
 	<subflow-state id="customer" subflow="checkout/customer">
       <input name="order" value="order"/>

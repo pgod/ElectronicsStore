@@ -38,8 +38,12 @@
 					<div class="row">
 						<div class="col-xs-6 col-sm-6 col-md-6">
 							<address>
-								<strong>Shipping address</strong> <br>
-								${order.customer.name}<br>
+								<strong>Shipping address</strong>
+								 <br>
+								${order.customer.name} 	${order.customer.surname}
+								<br>
+								${order.customer.surname}
+								<br>
 								${order.customer.billingAddress.streetName} ${order.customer.billingAddress.doorNo}
 								<br>
 								${order.customer.billingAddress.zipCode} ${order.customer.billingAddress.areaName}
