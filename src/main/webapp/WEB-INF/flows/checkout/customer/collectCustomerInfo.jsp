@@ -29,6 +29,13 @@
 						<form:input id="customerId" path="customerId" type="text" class="form:input-large" />
 					</div>
 				</div>
+	
+				<div class="form-group">
+					<label class="control-label col-lg-2 col-lg-2" for="surname" >Surname</label>
+					<div class="col-lg-10">
+						<form:input id="surname" path="surname" type="text" class="form:input-large" />
+					</div>
+				</div>
 
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="name">Name</label>

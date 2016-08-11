@@ -26,7 +26,7 @@
 			    	<form action="<c:url value="/login"></c:url>" method="post">
                     <fieldset>
 			    	  	<div class="form-group">
-			    		    <input class="form-control" placeholder="User name" name='username' type="text">
+			    		    <input class="form-control" placeholder="Email" name='username' type="text">
 			    		</div>
 			    		<div class="form-group">
 			    			<input class="form-control" placeholder="Password" name='password'  type="password" value="">
