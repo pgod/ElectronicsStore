@@ -16,9 +16,9 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.inMemoryAuthentication()
-				.withUser("user").password("user").roles("USER")
+				.withUser("user@gmail.com").password("user").roles("USER")
 				.and()
-				.withUser("admin").password("admin").roles("USER", "ADMIN");;
+				.withUser("admin@gmail.com").password("admin").roles("USER", "ADMIN");;
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -33,6 +33,9 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	.rememberMe()
 	.tokenValiditySeconds(2419200) // 4 weeks
 	.key("ElectronicsStoreLoginKey")
+	.and()
+	.requiresChannel()
+	.antMatchers("/login").requiresSecure()
 	.and()
 	.authorizeRequests()
 	.antMatchers("/products/add").hasRole("ADMIN")
