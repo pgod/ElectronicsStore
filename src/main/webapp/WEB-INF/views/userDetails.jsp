@@ -36,11 +36,11 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="billingAddress.StreetName"><spring:message code="editCustomer.form.streetName.label"/></label>
+					<label class="control-label col-lg-2" for="billingAddress.streetName"><spring:message code="editCustomer.form.streetName.label"/></label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input id="billingAddress.StreetName" path="billingAddress.StreetName" type="text" class="form:input-large"/>
-							<form:errors path="billingAddress.StreetName" cssClass="text-danger"/>
+							<form:input id="billingAddress.streetName" path="billingAddress.streetName" type="text" class="form:input-large"/>
+							<form:errors path="billingAddress.streetName" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>

@@ -10,7 +10,7 @@ public class Customer implements Serializable{
 	@Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
 	private String name;
 	private String surname;
-	private Address billingAddress;
+	private Address billingAddress = new Address();
 	private String phoneNumber;
 	public Customer()
 	{
