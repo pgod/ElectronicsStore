@@ -18,11 +18,11 @@ import godziszewski.patryk.ElectronicsStore.service.CustomerService;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class CustomerController {
 	private CustomerService customerService;
 	
 	@Autowired
-	public UserController(CustomerService customerService) {
+	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;
 	}
 	
@@ -38,7 +38,7 @@ public class UserController {
 	@RequestMapping(value = "/details", method = RequestMethod.POST)
 	public String processUserDetails(Model model, 
 			@AuthenticationPrincipal User activeUser,@ModelAttribute("customer") @Valid Customer customer,
-			BindingResult result, HttpServletRequest request)
+			BindingResult result)
 	{
 		if(result.hasErrors())
 		{
@@ -48,6 +48,26 @@ public class UserController {
 		customer.setEmail(userEmail);
 		customerService.update(userEmail, customer);
 		
+		return "redirect:/products";
+	}
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String getRegisterUser(Model model)
+	{
+		Customer customer = new Customer();
+		model.addAttribute("newCustomer", customer);
+		return "register";
+	}
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String processRegisterUser(Model model,
+			@ModelAttribute("newCustomer")  Customer customer,
+			BindingResult result)
+	{
+		if(result.hasErrors())
+		{
+			return "/register";
+		}
+	
+		customerService.create(customer);
 		return "redirect:/products";
 	}
 }

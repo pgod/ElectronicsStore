@@ -1,22 +1,30 @@
 package godziszewski.patryk.ElectronicsStore.config;
 
+
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.Validator;
 import org.springframework.webflow.config.AbstractFlowConfiguration;
 import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
+import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
 import org.springframework.webflow.executor.FlowExecutor;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 
 
-@Configuration
 public class FlowConfiguration extends AbstractFlowConfiguration {
-	
+
+	@Autowired
+	Validator validator;
 	
 	@Bean
 	public FlowDefinitionRegistry flowRegistry() {
 	    return getFlowDefinitionRegistryBuilder()
 	        .setBasePath("/WEB-INF/flows")
+	        //.setFlowBuilderServices(flowBuilderServices())
 	        .addFlowLocationPattern("/**/*-flow.xml")
 	        .build();
 	}
@@ -39,4 +47,14 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 		fh.setFlowExecutor(flowExecutor());
 		return fh;
 	}
+
+	@Bean
+	public FlowBuilderServices flowBuilderServices()
+	{
+		return getFlowBuilderServicesBuilder()
+				.setValidator(validator)
+				.build();
+	}
+	
+	
 }

@@ -22,7 +22,7 @@ public class CartTest {
 	@Test
 	public void cart_grand_total_should_be_eqaual_to_cart_item_price_in_case_of_single_quantity()
 	{
-		Product iphone = new Product("P1234","iPhone 5s", new BigDecimal(500));
+		Product iphone = new Product(1234,"iPhone 5s", new BigDecimal(500));
 		CartItem cartItem = new CartItem(iphone);
 		cart.addCartItem(cartItem);
 		

@@ -67,7 +67,7 @@ public class ProductController {
 		return "products";
 	}
 	@RequestMapping("/product")
-	public String getProductById(Model model, @RequestParam("id") String productId)
+	public String getProductById(Model model, @RequestParam("id") Integer productId)
 	{
 		model.addAttribute("product", productService.getProductById(productId));
 		return "product";
@@ -93,17 +93,8 @@ public class ProductController {
 			throw new RuntimeException("Trial of binding supressed fields: "
 					+StringUtils.arrayToCommaDelimitedString(supressedFields));
 		}
-		MultipartFile productImage = productToBeAdded.getProductImage();
-		String rootdirectory = request.getServletContext().getRealPath("/");
-		if(productImage != null && !productImage.isEmpty())
-		{
-			try {
-				FileCopyUtils.copy(productImage.getBytes(), 
-						new File( rootdirectory + "resources\\images\\"+productToBeAdded.getProductId()+".png"));
-			}  catch (Exception e) {
-				throw new RuntimeException("Error occoured while uploading image of the product", e);
-			}
-		}
+		
+		
 		productService.addProduct(productToBeAdded);
 		return "redirect:/products";
 	}

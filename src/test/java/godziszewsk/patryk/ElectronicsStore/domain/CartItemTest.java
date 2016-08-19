@@ -20,7 +20,7 @@ public class CartItemTest {
 	@Test
 	public void cartItem_total_price_should_be_eaual_to_product_unit_price_in_case_of_single_quantity()
 	{
-		Product iphone = new Product("P1234","iPhone 5s", new BigDecimal(500));
+		Product iphone = new Product(1234,"iPhone 5s", new BigDecimal(500));
 		cartItem.setProduct(iphone);
 		
 		BigDecimal totalPrice = cartItem.getTotalPrice();

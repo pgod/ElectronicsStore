@@ -44,11 +44,11 @@
 								<br>
 								${order.customer.surname}
 								<br>
-								${order.customer.billingAddress.streetName} ${order.customer.billingAddress.doorNo}
+								${order.customer.streetName} ${order.customer.doorNo}
 								<br>
-								${order.customer.billingAddress.zipCode} ${order.customer.billingAddress.areaName}
+								${order.customer.zipCode} ${order.customer.areaName}
 								<br>
-								${order.customer.billingAddress.state}, ${order.customer.billingAddress.country}
+								${order.customer.state}, ${order.customer.country}
 								<br> <abbr title="Phone">Phone:</abbr>
 								${order.customer.phoneNumber}
 							</address>

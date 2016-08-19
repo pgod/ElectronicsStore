@@ -14,26 +14,26 @@ import godziszewski.patryk.ElectronicsStore.exception.ProductNotFoundException;
 
 
 
-@Repository
+//@Repository
 public class InMemoryProductRepository implements ProductRepository{
 	
 	private List <Product> listOfProducts = new ArrayList<Product>();
 	public InMemoryProductRepository()
 	{
-		Product iphone=new Product("P1234","iPhone 5S", new BigDecimal(500));
+		Product iphone=new Product(1234,"iPhone 5S", new BigDecimal(500));
 		iphone.setDescription("Apple iPhone 5S, smartphone with "
 				+ "4 inch screen");
 		iphone.setCategory("Smart Phone");
 		iphone.setManufacturer("Apple");
 		iphone.setUnitsInStock(1000);
 		
-		Product laptop_dell = new Product("P1235","Dell Inspiron",new BigDecimal(600));
+		Product laptop_dell = new Product(1235,"Dell Inspiron",new BigDecimal(600));
 		laptop_dell.setDescription("Dell Inspiron with 14 inch display and Intel core i3 CPU");
 		laptop_dell.setCategory("Laptop");
 		laptop_dell.setManufacturer("Dell");
 		laptop_dell.setUnitsInStock(500);
 		
-		Product tablet=new Product("P1236","Nexus 7", new BigDecimal(300));
+		Product tablet=new Product(1236,"Nexus 7", new BigDecimal(300));
 		tablet.setDescription("Google Nexus 7, tablet with great design and responsivness");
 		tablet.setCategory("Tablet");
 		tablet.setManufacturer("Google");
@@ -49,7 +49,7 @@ public class InMemoryProductRepository implements ProductRepository{
 		return listOfProducts;
 	}
 
-	public Product getProductById(String productId) {
+	public Product getProductById(Integer productId) {
 		Product productById = null;
 		for(Product product : listOfProducts)
 		{

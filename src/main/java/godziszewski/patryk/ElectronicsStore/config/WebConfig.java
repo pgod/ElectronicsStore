@@ -2,9 +2,6 @@ package godziszewski.patryk.ElectronicsStore.config;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +24,6 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.UrlPathHelper;
-
 import godziszewski.patryk.ElectronicsStore.domain.Product;
 
 @Configuration
@@ -137,7 +133,7 @@ public MarshallingView xmlView()
 	return mv;
 }
 @Bean
-public LocalValidatorFactoryBean validator()
+public Validator validator()
 {
 	LocalValidatorFactoryBean lv = new LocalValidatorFactoryBean();
 	lv.setValidationMessageSource(messageSource());

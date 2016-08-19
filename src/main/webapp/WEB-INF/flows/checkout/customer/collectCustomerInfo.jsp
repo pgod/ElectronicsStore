@@ -40,61 +40,61 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="billingAddress.streetName"><spring:message code="editCustomer.form.streetName.label"/></label>
+					<label class="control-label col-lg-2" for="streetName"><spring:message code="editCustomer.form.streetName.label"/></label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input id="billingAddress.streetName" path="billingAddress.streetName" type="text" class="form:input-large"/>
-							<form:errors path="billingAddress.streetName" cssClass="text-danger"/>
+							<form:input id="streetName" path="streetName" type="text" class="form:input-large"/>
+							<form:errors path="streetName" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="billingAddress.doorNo"><spring:message code="editCustomer.form.doorNo.label"/></label>
+					<label class="control-label col-lg-2" for="doorNo"><spring:message code="editCustomer.form.doorNo.label"/></label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input id="billingAddress.doorNo" path="billingAddress.doorNo" type="text" class="form:input-large"/>
-							<form:errors path="billingAddress.doorNo" cssClass="text-danger"/>
+							<form:input id="doorNo" path="doorNo" type="text" class="form:input-large"/>
+							<form:errors path="doorNo" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="billingAddress.zipCode"><spring:message code="editCustomer.form.zipCode.label"/></label>
+					<label class="control-label col-lg-2" for="zipCode"><spring:message code="editCustomer.form.zipCode.label"/></label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input id="billingAddress.zipCode" path="billingAddress.zipCode" type="text" class="form:input-large"/>
-							<form:errors path="billingAddress.zipCode" cssClass="text-danger"/>
+							<form:input id="zipCode" path="zipCode" type="text" class="form:input-large"/>
+							<form:errors path="zipCode" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="billingAddress.areaName"><spring:message code="editCustomer.form.areaName.label"/></label>
+					<label class="control-label col-lg-2" for="areaName"><spring:message code="editCustomer.form.areaName.label"/></label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input id="billingAddress.areaName" path="billingAddress.areaName" type="text" class="form:input-large"/>
-							<form:errors path="billingAddress.areaName" cssClass="text-danger"/>
+							<form:input id="areaName" path="areaName" type="text" class="form:input-large"/>
+							<form:errors path="areaName" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="billingAddress.state"><spring:message code="editCustomer.form.state.label"/></label>
+					<label class="control-label col-lg-2" for="state"><spring:message code="editCustomer.form.state.label"/></label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input id="billingAddress.state" path="billingAddress.state" type="text" class="form:input-large"/>
-							<form:errors path="billingAddress.state" cssClass="text-danger"/>
+							<form:input id="state" path="state" type="text" class="form:input-large"/>
+							<form:errors path="state" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="billingAddress.country"><spring:message code="editCustomer.form.country.label"/></label>
+					<label class="control-label col-lg-2" for="country"><spring:message code="editCustomer.form.country.label"/></label>
 					<div class="col-lg-10">
 						<div class="form:input-prepend">
-							<form:input id="billingAddress.country" path="billingAddress.country" type="text" class="form:input-large"/>
-							<form:errors path="billingAddress.country" cssClass="text-danger"/>
+							<form:input id="country" path="country" type="text" class="form:input-large"/>
+							<form:errors path="country" cssClass="text-danger"/>
 						</div>
 					</div>
 				</div>

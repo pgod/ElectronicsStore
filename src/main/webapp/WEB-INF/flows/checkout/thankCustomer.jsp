@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 
 
 <html>
@@ -15,8 +16,7 @@
 		<div class="jumbotron">
 			<div class="container">
 				<h1 class="alert alert-danger"> Thank you!</h1>
-				<p>Thank you for placing order. It will be sent:  
-				<fmt:formatDate type="date"	value="${order.shippingDetail.shippingDate}" pattern="dd.MM.yyyy" />!</p>
+				<p>Thank you for placing order. Order placed on:  <joda:format value="${order.orderDate}" style="SM" />!
 				<p>Your order id:  ${order.orderId}</p>
 			</div>
 		</div>

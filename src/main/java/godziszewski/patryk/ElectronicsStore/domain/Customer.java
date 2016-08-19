@@ -2,25 +2,49 @@ package godziszewski.patryk.ElectronicsStore.domain;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class Customer implements Serializable{
 	private static final long serialVersionUID = 7565769627033046336L;
+	private Integer customerId;
+	@Email
 	private String email;
-	@Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
+	@NotNull
+	@Size(min=5, max=25, message="{Size.Customer.password.validation}")
+	private String password;
+	@Size(min = 3, max = 50, message = "{Size.Customer.name.validation}")
 	private String name;
+	@Size(min = 3, max = 50, message = "{Size.Customer.surname.validation}")
 	private String surname;
-	private Address billingAddress = new Address();
+	private String streetName;
+	private String doorNo;
+	private String areaName;
+	private String state;
+	private String country;
+	private String zipCode;
+	//@NotEmpty
+	@Pattern(regexp="(^$|[0-9]{9})") 
 	private String phoneNumber;
 	public Customer()
 	{
 		super();
-		this.billingAddress = new Address();
 	}
-	public Customer(String email, String name) {
+	public Customer(Integer customerId,String email, String name) {
 		super();
+		this.customerId = customerId;
 		this.email = email;
 		this.name = name;
+	}
+	public Integer getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
 	public String getEmail() {
 		return email;
@@ -34,19 +58,55 @@ public class Customer implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getSurname() {
 		return surname;
 	}
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public Address getBillingAddress() {
-		return billingAddress;
+	public String getDoorNo() {
+		return doorNo;
 	}
-	public void setBillingAddress(Address billingAddress) {
-		this.billingAddress = billingAddress;
+	public void setDoorNo(String doorNo) {
+		this.doorNo = doorNo;
 	}
+	public String getStreetName() {
+		return streetName;
+	}
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
+	public String getAreaName() {
+		return areaName;
+	}
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public String getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+	
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}

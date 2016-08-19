@@ -5,4 +5,5 @@ import godziszewski.patryk.ElectronicsStore.domain.Customer;
 public interface CustomerRepository {
 	Customer getCustomerByEmail(String id);
 	void update(String customerEmail, Customer customer);
+	void save(Customer customer);
 }

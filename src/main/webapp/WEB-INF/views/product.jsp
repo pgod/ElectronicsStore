@@ -30,9 +30,6 @@
 					<strong>Category</strong>: ${product.category}
 				</p>
 				<p>
-					<strong>Condition</strong>: ${product.condition}
-				</p>
-				<p>
 					<strong>Units in stock</strong>: ${product.unitsInStock}
 				</p>
 				<h4>${product.unitPrice} PLN</h4>
