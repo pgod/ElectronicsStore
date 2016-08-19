@@ -11,6 +11,6 @@ Technologies used:
 - JUnit
 - Mockito
 - Apache Tiles
-- -Spring WebFlow
+- Spring WebFlow
 - MySQL
 - Joda Time
