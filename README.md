@@ -5,9 +5,11 @@ Technologies used:
 - Spring
 - Spring MVC
 - JSP
-- Hibernate (validation)
+- Hibernate (validation & orm mapping)
 - Spring Security
 - XML & JSON parsing - for web service
 - JUnit
 - Mockito
 - Apache Tiles
+- MySQL
+- Joda Time
