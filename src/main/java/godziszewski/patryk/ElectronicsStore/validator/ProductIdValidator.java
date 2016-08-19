@@ -11,7 +11,7 @@ import godziszewski.patryk.ElectronicsStore.service.ProductService;
 
 
 
-public class ProductIdValidator implements ConstraintValidator<ProductId,String> {
+public class ProductIdValidator implements ConstraintValidator<ProductId,Integer> {
 	@Autowired
 	private ProductService productService;
 	
@@ -20,7 +20,7 @@ public class ProductIdValidator implements ConstraintValidator<ProductId,String>
 	{
 		
 	}
-	public boolean isValid(String value, ConstraintValidatorContext context) {
+	public boolean isValid(Integer value, ConstraintValidatorContext context) {
 		Product product;
 		try {
 			

@@ -3,6 +3,13 @@ package godziszewski.patryk.ElectronicsStore.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -18,45 +25,55 @@ import godziszewski.patryk.ElectronicsStore.validator.Category;
 import godziszewski.patryk.ElectronicsStore.validator.ProductId;
 
 @XmlRootElement
+@Entity
+@Table(name="Products")
 public class Product implements Serializable{
 	private static final long serialVersionUID = -7013955470939575675L;
-	@Pattern(regexp = "P[0-9]+", message ="{Pattern.Product.productId.validation}")
+	//@Pattern(regexp = "P[0-9]+", message ="{Pattern.Product.productId.validation}")
 	//commented out because of productControllerTest
 	//@ProductId
-	private String productId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer productId;
 	@Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
+	@Column(name = "Name", nullable = false)
 	private String name;
 	@Min(value = 0, message = "{Min.Product.UnitPrice.validation}")
 	@Digits(integer = 8, fraction = 2, message = "{Digits.Product.unitPrice.validation}")
 	@NotNull(message = "{NotNull.Product.unitPrice.validation}")
+	@Column(name = "UnitPrice", nullable = false)
 	private BigDecimal unitPrice;
+	@Column(name = "Description", nullable = false)
 	private String description;
+	@Column(name = "Manufacturer", nullable = false)
 	private String manufacturer;
 	@NotNull(message = "{NotNull.Product.category.validation}")
 	@Length(min = 1, max = 20, message = "{Length.Product.category.validation}")
-	@Category
+	//@Category
+	@Column(name = "Category", nullable = false)
 	private String category;
 	@Min(value = 0, message = "{Min.Product.UnitsInStock.validation}")
+	@Column(name = "UnitsInStock", nullable = false)
 	private long unitsInStock;
-	private long unitsInOrder;
+	@Column(name = "Discontinued", nullable = false)
 	private boolean discontinued;
-	private String condition;
+	@Transient
 	private MultipartFile productImage;
 	
 	public Product()
 	{
 		super();
 	}
-	public Product(String productId, String name, BigDecimal unitPrice)
+	public Product(Integer productId, String name, BigDecimal unitPrice)
 	{
 		this.productId=productId;
 		this.name=name;
 		this.unitPrice=unitPrice;
 	}
-	public String getProductId() {
+	public Integer getProductId() {
 		return productId;
 	}
-	public void setProductId(String productId) {
+	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
 	public String getName() {
@@ -95,23 +112,11 @@ public class Product implements Serializable{
 	public void setUnitsInStock(long unitsInStock) {
 		this.unitsInStock = unitsInStock;
 	}
-	public long getUnitsInOrder() {
-		return unitsInOrder;
-	}
-	public void setUnitsInOrder(long unitsInOrder) {
-		this.unitsInOrder = unitsInOrder;
-	}
 	public boolean isDiscontinued() {
 		return discontinued;
 	}
 	public void setDiscontinued(boolean discontinued) {
 		this.discontinued = discontinued;
-	}
-	public String getCondition() {
-		return condition;
-	}
-	public void setCondition(String condition) {
-		this.condition = condition;
 	}
 	@XmlTransient
 	public MultipartFile getProductImage() {

@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private CartService cartService;
 
-	public void processOrder(String productId, int count) {
+	public void processOrder(Integer productId, int count) {
 		Product productById=productRepository.
 				getProductById(productId);
 		if(productById.getUnitsInStock() < count)

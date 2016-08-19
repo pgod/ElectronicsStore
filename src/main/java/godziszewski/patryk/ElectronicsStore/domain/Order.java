@@ -2,16 +2,21 @@ package godziszewski.patryk.ElectronicsStore.domain;
 
 import java.io.Serializable;
 
+import org.joda.time.DateTime;
+
 public class Order implements Serializable{
 	private static final long serialVersionUID = -2901273482515323991L;
 	private Long orderId;
 	private Cart cart;
 	private Customer customer;
-	private ShippingDetail shippingDetail;
+	private OrderDetails orderDetails;
+	private final DateTime orderDate;
+	private DateTime shippingDate;
 	public Order()
 	{
 		this.customer = new Customer();
-		this.shippingDetail = new ShippingDetail();
+		this.orderDetails = new OrderDetails();
+		this.orderDate=new DateTime();
 	}
 	public Long getOrderId() {
 		return orderId;
@@ -31,11 +36,20 @@ public class Order implements Serializable{
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public ShippingDetail getShippingDetail() {
-		return shippingDetail;
+	public OrderDetails getOrderDetails() {
+		return orderDetails;
 	}
-	public void setShippingDetail(ShippingDetail shippingDetail) {
-		this.shippingDetail = shippingDetail;
+	public void setOrderDetails(OrderDetails orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+	public DateTime getOrderDate() {
+		return orderDate;
+	}
+	public DateTime getShippingDate() {
+		return shippingDate;
+	}
+	public void setShippingDate(DateTime shippingDate) {
+		this.shippingDate = shippingDate;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

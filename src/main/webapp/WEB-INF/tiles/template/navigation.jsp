@@ -9,6 +9,9 @@
 <sec:authorize access="isAnonymous()">
 <li><a href="<spring:url value="/login"/>">Log in</a></li>
 </sec:authorize>
+<sec:authorize access="isAnonymous()">
+<li><a href="<spring:url value="/user/register"/>">Register</a></li>
+</sec:authorize>
 <sec:authorize access="isAuthenticated()">
 <li><a href="<spring:url value="/user/details"/>"> <sec:authentication property="principal.username" />  </a></li>
 <li><a href="<spring:url value="/logout"/>" >Log out</a></li>

@@ -8,11 +8,11 @@ import java.util.Map;
 public class Cart implements Serializable {
 	private static final long serialVersionUID = 1255835667638846322L;
 	private String cartId;
-	private Map <String,CartItem> cartItems;
+	private Map <Integer,CartItem> cartItems;
 	private BigDecimal grandTotal;
 	public Cart()
 	{
-		cartItems = new HashMap<String, CartItem>();
+		cartItems = new HashMap<Integer, CartItem>();
 		grandTotal = new BigDecimal(0);
 	}
 	public Cart(String cartId)
@@ -26,10 +26,10 @@ public class Cart implements Serializable {
 	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
-	public Map<String, CartItem> getCartItems() {
+	public Map<Integer, CartItem> getCartItems() {
 		return cartItems;
 	}
-	public void setCartItems(Map<String, CartItem> cartItems) {
+	public void setCartItems(Map<Integer, CartItem> cartItems) {
 		this.cartItems = cartItems;
 	}
 	public BigDecimal getGrandTotal() {
@@ -37,7 +37,7 @@ public class Cart implements Serializable {
 	}
 	public void addCartItem(CartItem item)
 	{
-		String productId = item.getProduct().getProductId();
+		Integer productId = item.getProduct().getProductId();
 		if(cartItems.containsKey(productId))
 		{
 			CartItem existingCartItem = cartItems.get(productId);
@@ -53,7 +53,7 @@ public class Cart implements Serializable {
 	}
 	public void removeCartItem(CartItem item)
 	{
-		String productId = item.getProduct().getProductId();
+		Integer productId = item.getProduct().getProductId();
 		cartItems.remove(productId);
 		updateGrandTotal();
 	}

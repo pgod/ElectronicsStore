@@ -51,7 +51,7 @@ public class ProductControllerTest {
 		List<Product> listOfProducts = new ArrayList<Product>();
 		
 		
-		Product dell = new Product("P1200","Dell Inspiron", new BigDecimal("1500"));
+		Product dell = new Product(1200,"Dell Inspiron", new BigDecimal("1500"));
 		dell.setCategory("laptop");
 		listOfProducts.add(dell);
 		
@@ -78,7 +78,7 @@ public class ProductControllerTest {
 		List<Product> listOfProducts = new ArrayList<Product>();
 		
 		
-		Product dell = new Product("P1200","Dell Inspiron", new BigDecimal("1500"));
+		Product dell = new Product(1200,"Dell Inspiron", new BigDecimal("1500"));
 		dell.setCategory("laptop");
 		dell.setManufacturer("dell");
 		listOfProducts.add(dell);
@@ -115,11 +115,11 @@ public class ProductControllerTest {
 	public void testSearchingById() throws Exception
 	{
 		ProductService mockService = mock(ProductService.class);
-		Product dell = new Product("P1234","Dell Inspiron", new BigDecimal("1500"));
+		Product dell = new Product(1234,"Dell Inspiron", new BigDecimal("1500"));
 		List<Product> pr = new ArrayList<Product>();
 		pr.add(dell);
 	
-		when(mockService.getProductById("P1234"))
+		when(mockService.getProductById(1234))
 		.thenReturn(dell);
 		
 		
@@ -128,7 +128,7 @@ public class ProductControllerTest {
 				.setSingleView(new InternalResourceView("/WEB-INF/views/product.jsp"))
 				.build();
 	
-		mockMvc.perform(get("/products/product?id=P1234"))
+		mockMvc.perform(get("/products/product?id=1234"))
 		.andExpect(view().name("product"))
 		.andExpect(model().attributeExists("product"))
 		.andExpect(model().attribute("product",
@@ -152,7 +152,7 @@ public class ProductControllerTest {
 		 
 		 
 		 ProductController controller = new ProductController(mockService);
-		 Product product = new Product("P1234", "Dell Inspiron", new BigDecimal("1500"));
+		 Product product = new Product(1234, "Dell Inspiron", new BigDecimal("1500"));
 		 product.setCategory("laptop");
 		 product.setManufacturer("dell");
 		 product.setUnitsInStock(100);
@@ -164,7 +164,7 @@ public class ProductControllerTest {
 	  
 
 	    mockMvc.perform(post("/products/add")
-	    		.param("productId", "P1234")
+	    		.param("productId", "1234")
 	    		.param("name", "Dell Inspiron")
 	    		.param("unitPrice", "1500")
 	    		.param("category", "laptop")
