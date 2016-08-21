@@ -8,22 +8,30 @@ import org.springframework.stereotype.Repository;
 import godziszewski.patryk.ElectronicsStore.domain.Order;
 import godziszewski.patryk.ElectronicsStore.domain.repository.OrderRepository;
 
-@Repository
+//@Repository
 public class InMemoryOrderRepository implements OrderRepository {
-	private Map <Long, Order> listOfOrders;
+	private Map <Integer, Order> listOfOrders;
 	private long nextOrderId;
 	public InMemoryOrderRepository()
 	{
-		listOfOrders = new HashMap<Long, Order>();
+		listOfOrders = new HashMap<Integer, Order>();
 		nextOrderId = 1000;
 	}
-	public Long saveOrder(Order order) {
+	public void saveOrder(Order order) {
+		//order.setOrderId(getNextOrderId());
 		order.setOrderId(getNextOrderId());
 		listOfOrders.put(order.getOrderId(), order);
-		return order.getOrderId();
+		
 	}
-	private synchronized long getNextOrderId() 
+	private synchronized Integer getNextOrderId() 
 	{
-		return nextOrderId++;
+		return (int) nextOrderId++;
+	}
+
+
+	@Override
+	public Order getOrderById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

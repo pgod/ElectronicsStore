@@ -2,18 +2,21 @@ package godziszewski.patryk.ElectronicsStore.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -33,6 +36,7 @@ public class Product implements Serializable{
 	//commented out because of productControllerTest
 	//@ProductId
 	@Id
+	@Column(name = "ProductID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productId;
 	@Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
@@ -57,6 +61,8 @@ public class Product implements Serializable{
 	private long unitsInStock;
 	@Column(name = "Discontinued", nullable = false)
 	private boolean discontinued;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.product")
+	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 	@Transient
 	private MultipartFile productImage;
 	
@@ -124,6 +130,13 @@ public class Product implements Serializable{
 	}
 	public void setProductImage(MultipartFile productImage) {
 		this.productImage = productImage;
+	}
+	
+	public Set<OrderDetails> getOrderDetails() {
+		return orderDetails;
+	}
+	public void setOrderDetails(Set<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 	@Override
 	public int hashCode() {

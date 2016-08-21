@@ -1,9 +1,15 @@
 package godziszewski.patryk.ElectronicsStore.service.impl;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import godziszewski.patryk.ElectronicsStore.domain.Cart;
+import godziszewski.patryk.ElectronicsStore.domain.CartItem;
 import godziszewski.patryk.ElectronicsStore.domain.Order;
+import godziszewski.patryk.ElectronicsStore.domain.OrderDetails;
 import godziszewski.patryk.ElectronicsStore.domain.Product;
 import godziszewski.patryk.ElectronicsStore.domain.repository.OrderRepository;
 import godziszewski.patryk.ElectronicsStore.domain.repository.ProductRepository;
@@ -11,6 +17,7 @@ import godziszewski.patryk.ElectronicsStore.service.CartService;
 import godziszewski.patryk.ElectronicsStore.service.OrderService;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private ProductRepository productRepository;
@@ -30,9 +37,29 @@ public class OrderServiceImpl implements OrderService {
 		productById.setUnitsInStock(productById.getUnitsInStock() - count);
 	}
 
-	public Long saveOrder(Order order) {
-		Long orderId = orderRepository.saveOrder(order);
+	public void saveOrder(Order order) {
+		Cart cart=order.getCart();
+		
+		OrderDetails od = new OrderDetails();
+		od.setOrder(order);
+		
+		for (Map.Entry<Integer, CartItem> entry : cart.getCartItems().entrySet())
+		{
+			Product product = entry.getValue().getProduct();
+			od.setProduct(product);
+		    od.setQuantity(entry.getValue().getQuantity());
+			od.setUnitPrice(product.getUnitPrice());
+		}
+	
+			
+		    order.getOrderDetails().add(od);
+			orderRepository.saveOrder(order);
+			
 		cartService.delete(order.getCart().getCartId());
-		return orderId;
+	}
+
+	@Override
+	public Order getOrderById(Integer id) {
+		return orderRepository.getOrderById(id);
 	}
 }

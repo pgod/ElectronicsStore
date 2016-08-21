@@ -17,7 +17,7 @@ import godziszewski.patryk.ElectronicsStore.domain.Customer;
 import godziszewski.patryk.ElectronicsStore.domain.repository.CustomerRepository;
 import godziszewski.patryk.ElectronicsStore.exception.CustomerNotFoundException;
 
-@Repository
+//@Repository
 public class InMemoryCustomerRepository implements CustomerRepository, UserDetailsService {
 
 
@@ -57,7 +57,7 @@ public class InMemoryCustomerRepository implements CustomerRepository, UserDetai
 		return customerByEmail;
 	}
 
-	@Override
+	/*@Override
 	public void update(String email,Customer customer) {
 		if(!listOfCustomers.containsKey(email))
 		{
@@ -66,7 +66,7 @@ public class InMemoryCustomerRepository implements CustomerRepository, UserDetai
 		customer.setEmail(getCustomerByEmail(email).getEmail());
 		listOfCustomers.put(email, customer);
 		
-	}
+	}*/
 	@Override
 	public void save(Customer customer) {
 		
@@ -91,5 +91,10 @@ public class InMemoryCustomerRepository implements CustomerRepository, UserDetai
 			customer.getEmail(),
 			customer.getPassword(),
 			authorities);
+	}
+	@Override
+	public Customer getCustomerById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
