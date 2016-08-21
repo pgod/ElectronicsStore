@@ -1,28 +1,65 @@
 package godziszewski.patryk.ElectronicsStore.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.joda.time.DateTime;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+@Entity
+@Table(name="Orders")
 public class Order implements Serializable{
 	private static final long serialVersionUID = -2901273482515323991L;
-	private Long orderId;
+	@Id
+	@Column(name = "OrderID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer orderId;
+	@Transient
 	private Cart cart;
+	@ManyToOne
+	@JoinColumn(name = "CustomerID")
 	private Customer customer;
-	private OrderDetails orderDetails;
-	private final DateTime orderDate;
-	private DateTime shippingDate;
+
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.order")
+	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
+	
+	@DateTimeFormat(pattern="dd/MM/yyyy") 
+    @Column(name = "OrderDate", nullable = false)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+	private final LocalDate orderDate;
+	@DateTimeFormat(pattern="dd/MM/yyyy") 
+    @Column(name = "ShippingDate", nullable = false)
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+	private LocalDate shippingDate;
+	@Column(name = "TotalPrice")
+	private BigDecimal totalPrice;
 	public Order()
 	{
-		this.customer = new Customer();
-		this.orderDetails = new OrderDetails();
-		this.orderDate=new DateTime();
+		this.orderDate=new LocalDate();
+		this.shippingDate=new LocalDate();
+		this.totalPrice = new BigDecimal(0);
 	}
-	public Long getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
+	public void setOrderId(Integer Id) {
+		this.orderId = Id;
 	}
 	public Cart getCart() {
 		return cart;
@@ -30,26 +67,39 @@ public class Order implements Serializable{
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+
+	
 	public Customer getCustomer() {
 		return customer;
 	}
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public OrderDetails getOrderDetails() {
-		return orderDetails;
-	}
-	public void setOrderDetails(OrderDetails orderDetails) {
-		this.orderDetails = orderDetails;
-	}
-	public DateTime getOrderDate() {
-		return orderDate;
-	}
-	public DateTime getShippingDate() {
+
+
+	public LocalDate getShippingDate() {
 		return shippingDate;
 	}
-	public void setShippingDate(DateTime shippingDate) {
+	public void setShippingDate(LocalDate shippingDate) {
 		this.shippingDate = shippingDate;
+	}
+	
+	
+	public Set<OrderDetails> getOrderDetails() {
+		return orderDetails;
+	}
+	public void setOrderDetails(Set<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+	public LocalDate getOrderDate() {
+		return orderDate;
+	}
+	
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

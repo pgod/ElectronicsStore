@@ -2,33 +2,54 @@ package godziszewski.patryk.ElectronicsStore.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-
+@Entity
+@Table(name="Customers")
 public class Customer implements Serializable{
 	private static final long serialVersionUID = 7565769627033046336L;
+	@Id
+	@Column(name = "CustomerID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
 	@Email
+	@Column(name = "Email", nullable = false)
 	private String email;
 	@NotNull
 	@Size(min=5, max=25, message="{Size.Customer.password.validation}")
+	@Column(name = "Password", nullable = false)
 	private String password;
 	@Size(min = 3, max = 50, message = "{Size.Customer.name.validation}")
+	@Column(name = "Name", nullable = false)
 	private String name;
 	@Size(min = 3, max = 50, message = "{Size.Customer.surname.validation}")
+	@Column(name = "Surname", nullable = false)
 	private String surname;
+	@Column(name = "StreetName")
 	private String streetName;
+	@Column(name = "DoorNo")
 	private String doorNo;
+	@Column(name = "AreaName")
 	private String areaName;
+	@Column(name = "State")
 	private String state;
+	@Column(name = "Country")
 	private String country;
+	@Column(name = "ZipCode")
 	private String zipCode;
 	//@NotEmpty
 	@Pattern(regexp="(^$|[0-9]{9})") 
+	@Column(name = "PhoneNumber", nullable = false)
 	private String phoneNumber;
 	public Customer()
 	{

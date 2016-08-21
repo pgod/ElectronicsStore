@@ -35,7 +35,7 @@
 	</view-state>
 	
 	<action-state id="processOrder">
-		<evaluate expression="orderServiceImpl.saveOrder(order)" result="order.orderId"/>
+		<evaluate expression="orderServiceImpl.saveOrder(order)" />
 		<transition to="thankCustomer" />
 	</action-state>
 	
