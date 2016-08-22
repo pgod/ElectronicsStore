@@ -3,12 +3,14 @@ package godziszewski.patryk.ElectronicsStore.domain.repository.impl;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -17,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import godziszewski.patryk.ElectronicsStore.domain.Product;
 import godziszewski.patryk.ElectronicsStore.domain.repository.ProductRepository;
 @Repository
-@Transactional
 public class ProductDAO extends AbstractDAO<Integer, Product> implements ProductRepository{
 
 	@Override
@@ -33,22 +34,50 @@ public class ProductDAO extends AbstractDAO<Integer, Product> implements Product
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Product> getProductsByCategory(String category) {
-		// TODO Auto-generated method stub
-		return null;
+		Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("category", category));
+		return (List<Product>) criteria.list();
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Product> getProductsByFilter(Map<String, List<String>> filterParams) {
-		// TODO Auto-generated method stub
-		return null;
+		Set <String> productCriterias = filterParams.keySet();
+		
+		Criteria criteria = createEntityCriteria();
+		Disjunction or = Restrictions.disjunction();
+		
+		if(productCriterias.contains("brand"))
+		{
+			for(String brandName : filterParams.get("brand"))
+			{
+				or.add(Restrictions.eq("manufacturer",brandName));
+			}
+		}
+		criteria.add(or);
+		or=Restrictions.disjunction();
+		if(productCriterias.contains("category"))
+		{
+			for(String categoryName : filterParams.get("category"))
+			{
+				or.add(Restrictions.eq("category",categoryName));
+			}
+		}
+		criteria.add(or);
+		return(List<Product>) criteria.list();
 	}
 
 	@Override
 	public void addProduct(Product product) {
 		persist(product);
+		uploadProductImage(product);
 		
-		//Uploading product image
+		
+	}
+	private void uploadProductImage(Product product)
+	{
 		MultipartFile productImage = product.getProductImage();
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
 				.getRequestAttributes()).getRequest();
@@ -62,7 +91,6 @@ public class ProductDAO extends AbstractDAO<Integer, Product> implements Product
 				throw new RuntimeException("Error occoured while uploading image of the product", e);
 			}
 		}
-		
 	}
 	
 }

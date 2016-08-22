@@ -1,6 +1,5 @@
 package godziszewski.patryk.ElectronicsStore.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,8 @@ public class CustomerController {
 		}
 		String userEmail = activeUser.getUsername();
 		customer.setEmail(userEmail);
-		customerService.update(userEmail, customer);
+		
+		customerService.update(customer);
 		
 		return "redirect:/products";
 	}
