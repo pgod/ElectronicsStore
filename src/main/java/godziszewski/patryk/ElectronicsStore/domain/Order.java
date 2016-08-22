@@ -33,7 +33,6 @@ public class Order implements Serializable{
 	private Cart cart;
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "CustomerID")
-	//@Transient
 	private Customer customer;
 
 	
