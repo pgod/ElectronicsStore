@@ -4,5 +4,6 @@ import godziszewski.patryk.ElectronicsStore.domain.Order;
 
 public interface OrderService {
 	void processOrder(Integer productId, int count);
-	Long saveOrder(Order order);
+	void saveOrder(Order order);
+	Order getOrderById(Integer id);
 }

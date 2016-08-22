@@ -45,7 +45,7 @@
 					<th></th>
 					<th></th>
 					<th>Total</th>
-					<th>{{cart.grandTotal}} PLN</th>
+					<th>{${cart.grandTotal}} PLN</th>
 					<th></th>
 				</tr>
 			</table>

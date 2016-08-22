@@ -3,11 +3,14 @@ package godziszewski.patryk.ElectronicsStore.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import godziszewski.patryk.ElectronicsStore.domain.Customer;
 import godziszewski.patryk.ElectronicsStore.domain.repository.CustomerRepository;
 import godziszewski.patryk.ElectronicsStore.service.CustomerService;
 
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
 
 	private final CustomerRepository customerRepository;
@@ -21,8 +24,21 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.getCustomerByEmail(email);
 	}
 	@Override
-	public void update(String customerId,Customer customer) {
-		customerRepository.update(customerId, customer);
+	public void update(Customer customer) {
+		Customer entity = customerRepository.getCustomerByEmail(customer.getEmail());
+        if(entity!=null){
+        	entity.setEmail(customer.getEmail());
+        	entity.setPassword(customer.getPassword());
+            entity.setName(customer.getName());
+            entity.setSurname(customer.getSurname());
+            entity.setStreetName(customer.getStreetName());
+            entity.setDoorNo(customer.getDoorNo());
+            entity.setAreaName(customer.getAreaName());
+            entity.setState(customer.getState());
+            entity.setCountry(customer.getCountry());
+            entity.setZipCode(customer.getZipCode());
+            entity.setPhoneNumber(customer.getPhoneNumber());
+        }
 	}
 	@Override
 	public void create(Customer customer) {
@@ -30,8 +46,9 @@ public class CustomerServiceImpl implements CustomerService {
 		
 	}
 
-
-
-	
+	@Override
+	public Customer getCustomerById(Integer id) {
+		return customerRepository.getCustomerById(id);
+	}
 
 }
