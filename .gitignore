@@ -45,5 +45,4 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-target/classes/godziszewski/patryk/ElectronicsStore/domain/OrderDetailsID.class
-src/main/java/godziszewski/patryk/ElectronicsStore/domain/OrderDetailsID.java
+/target/
