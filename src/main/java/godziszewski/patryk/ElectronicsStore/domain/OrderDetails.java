@@ -5,25 +5,33 @@ import java.math.BigDecimal;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name="OrderDetails")
-@AssociationOverrides({
-	@AssociationOverride(name = "pk.order",
-		joinColumns = @JoinColumn(name = "OrderID")),
-	@AssociationOverride(name = "pk.product",
-		joinColumns = @JoinColumn(name = "ProductID")) })
 public class OrderDetails implements Serializable{
 	private static final long serialVersionUID = 1080967130345703888L;
 	
-	
-	private OrderDetailsID pk = new OrderDetailsID();
+	@Id
+	@Column(name = "OrderDetailsID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer orderDetailsID;
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "OrderID") 
+	private Order order;
+	@ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "ProductID") 
+	private Product product;
 	
 	@Column(name = "Quantity", nullable = false)
 	private Integer quantity;
@@ -35,31 +43,37 @@ public class OrderDetails implements Serializable{
 		
 	}
 	
-	@EmbeddedId
-	public OrderDetailsID getPk() {
-		return pk;
-	}
-	public void setPk(OrderDetailsID pk) {
-		this.pk = pk;
+	
+	public Integer getOrderDetailsID() {
+		return orderDetailsID;
 	}
 
-	@Transient
-	public Order getOrder() {
-		return getPk().getOrder();
+
+	public void setOrderDetailsID(Integer orderDetailsID) {
+		this.orderDetailsID = orderDetailsID;
 	}
+
+
+	public Order getOrder() {
+		return order;
+	}
+
 
 	public void setOrder(Order order) {
-		getPk().setOrder(order);
+		this.order = order;
 	}
 
-	@Transient
+
 	public Product getProduct() {
-		return getPk().getProduct();
+		return product;
 	}
+
 
 	public void setProduct(Product product) {
-		getPk().setProduct(product);
+		this.product = product;
 	}
+
+
 	public Integer getQuantity() {
 		return quantity;
 	}

@@ -31,12 +31,13 @@ public class Order implements Serializable{
 	private Integer orderId;
 	@Transient
 	private Cart cart;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "CustomerID")
+	//@Transient
 	private Customer customer;
 
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.order")
+	@OneToMany(mappedBy = "order")
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy") 

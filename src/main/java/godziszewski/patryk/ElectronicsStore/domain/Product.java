@@ -61,7 +61,10 @@ public class Product implements Serializable{
 	private long unitsInStock;
 	@Column(name = "Discontinued", nullable = false)
 	private boolean discontinued;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.product")
+	//does problems with cart overview
+	
+	//@Transient
+	@OneToMany(mappedBy = "product")
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 	@Transient
 	private MultipartFile productImage;
@@ -131,7 +134,7 @@ public class Product implements Serializable{
 	public void setProductImage(MultipartFile productImage) {
 		this.productImage = productImage;
 	}
-	
+
 	public Set<OrderDetails> getOrderDetails() {
 		return orderDetails;
 	}
