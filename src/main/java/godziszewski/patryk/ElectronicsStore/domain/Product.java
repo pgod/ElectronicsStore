@@ -40,21 +40,21 @@ public class Product implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productId;
 	@Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
-	@Column(name = "Name", nullable = false)
+	@Column(name = "Name", nullable = false, length = 40)
 	private String name;
 	@Min(value = 0, message = "{Min.Product.UnitPrice.validation}")
 	@Digits(integer = 8, fraction = 2, message = "{Digits.Product.unitPrice.validation}")
 	@NotNull(message = "{NotNull.Product.unitPrice.validation}")
 	@Column(name = "UnitPrice", nullable = false)
 	private BigDecimal unitPrice;
-	@Column(name = "Description", nullable = false)
+	@Column(name = "Description", nullable = false, length = 300)
 	private String description;
-	@Column(name = "Manufacturer", nullable = false)
+	@Column(name = "Manufacturer", nullable = false, length = 30)
 	private String manufacturer;
 	@NotNull(message = "{NotNull.Product.category.validation}")
 	@Length(min = 1, max = 20, message = "{Length.Product.category.validation}")
 	//@Category
-	@Column(name = "Category", nullable = false)
+	@Column(name = "Category", nullable = false, length = 20)
 	private String category;
 	@Min(value = 0, message = "{Min.Product.UnitsInStock.validation}")
 	@Column(name = "UnitsInStock", nullable = false)

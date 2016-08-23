@@ -42,8 +42,6 @@
 								 <br>
 								${order.customer.name} 	${order.customer.surname}
 								<br>
-								${order.customer.surname}
-								<br>
 								${order.customer.streetName} ${order.customer.doorNo}
 								<br>
 								${order.customer.zipCode} ${order.customer.areaName}

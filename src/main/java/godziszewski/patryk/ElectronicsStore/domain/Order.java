@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,7 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Order implements Serializable{
 	private static final long serialVersionUID = -2901273482515323991L;
 	@Id
-	@Column(name = "OrderID")
+	@Column(name = "OrderID", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer orderId;
 	@Transient
@@ -45,7 +46,7 @@ public class Order implements Serializable{
     @Column(name = "ShippingDate", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	private LocalDate shippingDate;
-	@Column(name = "TotalPrice")
+	@Column(name = "TotalPrice", nullable = false)
 	private BigDecimal totalPrice;
 	public Order()
 	{
