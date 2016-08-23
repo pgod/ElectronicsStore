@@ -13,6 +13,4 @@ public class OrderDetailsDAO extends AbstractDAO<Integer, OrderDetails> implemen
 		persist(orderDetails);
 		
 	}
-
-
 }

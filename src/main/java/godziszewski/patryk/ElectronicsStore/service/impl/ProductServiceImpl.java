@@ -32,4 +32,17 @@ public class ProductServiceImpl implements ProductService {
 	public void addProduct(Product product) {
 		productRepository.addProduct(product);
 	}
+	@Override
+	public void updateProduct(Product product) {
+		Product p = productRepository.getProductById(product.getProductId());
+        if(p!=null){
+            p.setName(product.getName());
+            p.setUnitPrice(product.getUnitPrice());
+            p.setDescription(product.getDescription());
+            p.setManufacturer(product.getManufacturer());
+            p.setCategory(product.getCategory());
+            p.setUnitsInStock(product.getUnitsInStock());
+            p.setDiscontinued(product.isDiscontinued());
+        }
+	}
 }

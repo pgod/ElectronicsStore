@@ -5,10 +5,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +29,7 @@ public class Order implements Serializable{
 	private Integer orderId;
 	@Transient
 	private Cart cart;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name = "CustomerID")
 	private Customer customer;
 

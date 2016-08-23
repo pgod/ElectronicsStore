@@ -27,7 +27,7 @@ public class ProductDAO extends AbstractDAO<Integer, Product> implements Product
 		Criteria criteria = createEntityCriteria();
         return (List<Product>) criteria.list();
 	}
-
+	
 	@Override
 	public Product getProductById(Integer productId) {
 		 return getByKey(productId);
@@ -73,8 +73,6 @@ public class ProductDAO extends AbstractDAO<Integer, Product> implements Product
 	public void addProduct(Product product) {
 		persist(product);
 		uploadProductImage(product);
-		
-		
 	}
 	private void uploadProductImage(Product product)
 	{
@@ -92,5 +90,4 @@ public class ProductDAO extends AbstractDAO<Integer, Product> implements Product
 			}
 		}
 	}
-	
 }
