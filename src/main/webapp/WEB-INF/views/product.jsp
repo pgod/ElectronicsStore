@@ -1,7 +1,7 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-	
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -39,7 +39,11 @@
 <a href="<spring:url value="/cart" />" class="btn btn-default">
 	<span class="glyphicon-hand-right glyphicon"></span> Cart
 </a>
-
+<sec:authorize access="hasRole('ADMIN')">
+	<a href="<spring:url value="edit/${product.productId}" />" class="btn btn-default">
+		<span class="glyphicon-hand-right glyphicon"></span> Edit
+	</a>
+</sec:authorize>
  <a href="<spring:url value="/products" />" class="btn btn-default">
 						<span class="glyphicon-hand-left glyphicon"></span> Back
 					</a>
