@@ -1,12 +1,16 @@
 package godziszewski.patryk.ElectronicsStore.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -51,6 +55,11 @@ public class Customer implements Serializable{
 	@Pattern(regexp="(^$|[0-9]{9})") 
 	@Column(name = "PhoneNumber", nullable = false)
 	private String phoneNumber;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="OrderID")
+	private Set<Order> orders;
+	
 	public Customer()
 	{
 		super();
@@ -133,6 +142,13 @@ public class Customer implements Serializable{
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	
+	public Set<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

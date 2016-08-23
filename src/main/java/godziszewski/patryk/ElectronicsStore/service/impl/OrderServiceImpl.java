@@ -22,30 +22,32 @@ import godziszewski.patryk.ElectronicsStore.domain.repository.OrderDetailsReposi
 import godziszewski.patryk.ElectronicsStore.domain.repository.OrderRepository;
 import godziszewski.patryk.ElectronicsStore.domain.repository.ProductRepository;
 import godziszewski.patryk.ElectronicsStore.service.CartService;
+import godziszewski.patryk.ElectronicsStore.service.OrderDetailsService;
 import godziszewski.patryk.ElectronicsStore.service.OrderService;
+import godziszewski.patryk.ElectronicsStore.service.ProductService;
 
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService {
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductService productService;
 	@Autowired 
 	private OrderRepository orderRepository;
 	@Autowired
 	private CartService cartService;
 	@Autowired
-	private OrderDetailsRepository orderDetailsRepository;
+	private OrderDetailsService orderDetailsService;
 
 
 	public void processOrder(Integer productId, int count) {
-		Product productById=productRepository.
+		Product productById=productService.
 				getProductById(productId);
 		if(productById.getUnitsInStock() < count)
 		{
 			throw new IllegalArgumentException("Unfortunately, we do not  have enough units in stock. "
 					+ "Current amount of items in stock: "+productById.getUnitsInStock());
 		}
-		productById.setUnitsInStock(productById.getUnitsInStock() - count);
+		
 	}
 
 	public void saveOrder(Order order) {
@@ -61,10 +63,15 @@ public class OrderServiceImpl implements OrderService {
 			od.setProduct(product);
 		    od.setQuantity(entry.getValue().getQuantity());
 			od.setUnitPrice(product.getUnitPrice());
-			orderDetailsRepository.save(od);
+			
+			product.setUnitsInStock(product.getUnitsInStock()-od.getQuantity());
+			productService.updateProduct(product);
+			
+			orderDetailsService.save(od);
 		}
 		
 		cartService.delete(order.getCart().getCartId());
+		
 	}
 
 	@Override
