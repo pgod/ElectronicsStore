@@ -23,37 +23,37 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Customer implements Serializable{
 	private static final long serialVersionUID = 7565769627033046336L;
 	@Id
-	@Column(name = "CustomerID")
+	@Column(name = "CustomerID", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
 	@Email
-	@Column(name = "Email", nullable = false)
+	@Column(name = "Email", nullable = false, length = 60)
 	private String email;
 	@NotNull
 	@Size(min=5, max=25, message="{Size.Customer.password.validation}")
-	@Column(name = "Password", nullable = false)
+	@Column(name = "Password", nullable = false, length = 50)
 	private String password;
 	@Size(min = 3, max = 50, message = "{Size.Customer.name.validation}")
-	@Column(name = "Name", nullable = false)
+	@Column(name = "Name", length = 30)
 	private String name;
 	@Size(min = 3, max = 50, message = "{Size.Customer.surname.validation}")
-	@Column(name = "Surname", nullable = false)
+	@Column(name = "Surname", length = 30)
 	private String surname;
-	@Column(name = "StreetName")
+	@Column(name = "StreetName", length = 50)
 	private String streetName;
 	@Column(name = "DoorNo")
 	private String doorNo;
-	@Column(name = "AreaName")
+	@Column(name = "AreaName", length = 20)
 	private String areaName;
-	@Column(name = "State")
+	@Column(name = "State", length = 50)
 	private String state;
-	@Column(name = "Country")
+	@Column(name = "Country", length = 25)
 	private String country;
-	@Column(name = "ZipCode")
+	@Column(name = "ZipCode", length = 10)
 	private String zipCode;
 	//@NotEmpty
 	@Pattern(regexp="(^$|[0-9]{9})") 
-	@Column(name = "PhoneNumber", nullable = false)
+	@Column(name = "PhoneNumber", nullable = false, length = 15)
 	private String phoneNumber;
 	
 	@OneToMany(cascade=CascadeType.ALL)
