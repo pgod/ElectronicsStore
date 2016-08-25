@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,9 @@ import godziszewski.patryk.ElectronicsStore.service.CustomerService;
 @Controller
 @RequestMapping("/user")
 public class CustomerController {
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	private CustomerService customerService;
 	
 	@Autowired
@@ -31,6 +35,8 @@ public class CustomerController {
 	{
 		Customer customer = customerService.getCustomerByEmail(
 				activeUser.getUsername());
+		//not displaying password for security reasons
+		customer.setPassword("");
 		model.addAttribute("customer", customer);
 		return "userDetails";
 	}
@@ -39,9 +45,11 @@ public class CustomerController {
 			@AuthenticationPrincipal User activeUser,@ModelAttribute("customer") @Valid Customer customer,
 			BindingResult result)
 	{
-		if(result.hasErrors())
+		if(result.hasErrors()||
+				!passwordEncoder.matches(customer.getPassword(),
+						customerService.getCustomerByEmail(activeUser.getUsername()).getPassword()))
 		{
-			return "/userDetails";
+			return "redirect:/user/details";
 		}
 		String userEmail = activeUser.getUsername();
 		customer.setEmail(userEmail);
@@ -62,6 +70,7 @@ public class CustomerController {
 			@ModelAttribute("newCustomer")  Customer customer,
 			BindingResult result)
 	{
+		
 		if(result.hasErrors())
 		{
 			return "/register";

@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,10 +22,10 @@ public class OrderDetails implements Serializable{
 	@Column(name = "OrderDetailsID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer orderDetailsID;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
     @JoinColumn(name = "OrderID") 
 	private Order order;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch=FetchType.LAZY)
     @JoinColumn(name = "ProductID") 
 	private Product product;
 	@Column(name = "Quantity", nullable = false)

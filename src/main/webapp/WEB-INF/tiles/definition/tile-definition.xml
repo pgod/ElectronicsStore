@@ -92,4 +92,10 @@
 		<put-attribute name="content" value="/WEB-INF/flows/checkout/thankCustomer.jsp" />
 	</definition>
 	
+	<definition name="editProduct" extends="baseLayout">
+		<put-attribute name="title" value="Edit product" />
+		<put-attribute name="heading" value="Product details" />
+		<put-attribute name="content" value="/WEB-INF/views/editProduct.jsp" />
+	</definition>
+	
 </tiles-definitions>

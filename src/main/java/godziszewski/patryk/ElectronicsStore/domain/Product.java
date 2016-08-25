@@ -64,7 +64,7 @@ public class Product implements Serializable{
 	//does problems with cart overview
 	
 	//@Transient
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", fetch=FetchType.LAZY)
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 	@Transient
 	private MultipartFile productImage;
