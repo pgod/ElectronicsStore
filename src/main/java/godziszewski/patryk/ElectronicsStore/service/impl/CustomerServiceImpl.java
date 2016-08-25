@@ -2,6 +2,7 @@ package godziszewski.patryk.ElectronicsStore.service.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,9 @@ import godziszewski.patryk.ElectronicsStore.service.CustomerService;
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	private final CustomerRepository customerRepository;
 	@Autowired
@@ -28,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer entity = customerRepository.getCustomerByEmail(customer.getEmail());
         if(entity!=null){
         	entity.setEmail(customer.getEmail());
-        	entity.setPassword(customer.getPassword());
+        	entity.setPassword(passwordEncoder.encode(customer.getPassword()));
             entity.setName(customer.getName());
             entity.setSurname(customer.getSurname());
             entity.setStreetName(customer.getStreetName());
@@ -42,8 +46,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 	@Override
 	public void create(Customer customer) {
+		 customer.setPassword(passwordEncoder
+				 .encode(customer.getPassword()));
 		 customerRepository.save(customer);
-		
 	}
 
 	@Override

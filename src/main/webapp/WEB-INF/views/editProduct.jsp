@@ -81,6 +81,9 @@
 					<div class="col-lg-offset-2 col-lg-10">
 						<input type="submit" id="btnAdd" class="btn btn-primary" value ="Submit"/>
 					</div>
+					 <a href="<spring:url value="/products" />" class="btn btn-default">
+						<span class="glyphicon-hand-left glyphicon"></span> Back
+					</a>
 				</div>
 				
 			</fieldset>

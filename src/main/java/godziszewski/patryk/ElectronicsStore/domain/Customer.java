@@ -30,8 +30,8 @@ public class Customer implements Serializable{
 	@Column(name = "Email", nullable = false, length = 60)
 	private String email;
 	@NotNull
-	@Size(min=5, max=25, message="{Size.Customer.password.validation}")
-	@Column(name = "Password", nullable = false, length = 50)
+	//@Size(min=5, max=25, message="{Size.Customer.password.validation}")
+	@Column(name = "Password", nullable = false, length = 60)
 	private String password;
 	@Size(min = 3, max = 50, message = "{Size.Customer.name.validation}")
 	@Column(name = "Name", length = 30)

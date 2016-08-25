@@ -1,4 +1,4 @@
-package godziszewsk.patryk.ElectronicsStore.domain;
+package godziszewski.patryk.ElectronicsStore.domain;
 
 import java.math.BigDecimal;
 
