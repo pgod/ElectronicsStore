@@ -2,25 +2,16 @@ package godziszewski.patryk.ElectronicsStore.service.impl;
 
 import java.util.Map;
 
-import javax.transaction.TransactionManager;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
 
 import godziszewski.patryk.ElectronicsStore.domain.Cart;
 import godziszewski.patryk.ElectronicsStore.domain.CartItem;
 import godziszewski.patryk.ElectronicsStore.domain.Order;
 import godziszewski.patryk.ElectronicsStore.domain.OrderDetails;
 import godziszewski.patryk.ElectronicsStore.domain.Product;
-import godziszewski.patryk.ElectronicsStore.domain.repository.OrderDetailsRepository;
 import godziszewski.patryk.ElectronicsStore.domain.repository.OrderRepository;
-import godziszewski.patryk.ElectronicsStore.domain.repository.ProductRepository;
 import godziszewski.patryk.ElectronicsStore.service.CartService;
 import godziszewski.patryk.ElectronicsStore.service.OrderDetailsService;
 import godziszewski.patryk.ElectronicsStore.service.OrderService;

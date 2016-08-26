@@ -39,6 +39,7 @@
 					<label class="control-label col-lg-2" for="description"><spring:message code="addProduct.form.description.label"/></label>
 					<div class="col-lg-10">
 						<form:textarea id="description" path="description" rows = "2"/>
+						<form:errors path="description" cssClass="text-danger"/>
 					</div>
 				</div>
 
@@ -46,6 +47,7 @@
 					<label class="control-label col-lg-2" for="manufacturer"><spring:message code="addProduct.form.manufacturer.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="manufacturer" path="manufacturer" type="text" class="form:input-large"/>
+						<form:errors path="manufacturer" cssClass="text-danger"/>
 					</div>
 				</div>
 
@@ -53,6 +55,7 @@
 					<label class="control-label col-lg-2" for="category"><spring:message code="addProduct.form.category.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="category" path="category" type="text" class="form:input-large"/>
+						<form:errors path="category" cssClass="text-danger"/>
 					</div>
 				</div>
 
