@@ -49,7 +49,7 @@ public class CustomerController {
 				!passwordEncoder.matches(customer.getPassword(),
 						customerService.getCustomerByEmail(activeUser.getUsername()).getPassword()))
 		{
-			return "redirect:/user/details";
+			return "userDetails";
 		}
 		String userEmail = activeUser.getUsername();
 		customer.setEmail(userEmail);
@@ -67,13 +67,13 @@ public class CustomerController {
 	}
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String processRegisterUser(Model model,
-			@ModelAttribute("newCustomer")  Customer customer,
+			@ModelAttribute("newCustomer") @Valid Customer customer,
 			BindingResult result)
 	{
 		
 		if(result.hasErrors())
 		{
-			return "/register";
+			return "register";
 		}
 	
 		customerService.create(customer);

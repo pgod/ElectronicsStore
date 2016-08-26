@@ -17,7 +17,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+import godziszewski.patryk.ElectronicsStore.validator.CustomerEmail;
+
 @Entity
 @Table(name="Customers")
 public class Customer implements Serializable{
@@ -28,10 +29,13 @@ public class Customer implements Serializable{
 	private Integer customerId;
 	@Email
 	@Column(name = "Email", nullable = false, length = 60)
+	//can not duplicate emails in database
+	@CustomerEmail
+	@Size(min = 3, max = 60, message = "{Size.Customer.email.validation}")
 	private String email;
 	@NotNull
-	//@Size(min=5, max=25, message="{Size.Customer.password.validation}")
 	@Column(name = "Password", nullable = false, length = 60)
+	@Size(min = 5, max = 60, message = "{Size.Customer.password.validation}")
 	private String password;
 	@Size(min = 3, max = 50, message = "{Size.Customer.name.validation}")
 	@Column(name = "Name", length = 30)
@@ -51,7 +55,6 @@ public class Customer implements Serializable{
 	private String country;
 	@Column(name = "ZipCode", length = 10)
 	private String zipCode;
-	//@NotEmpty
 	@Pattern(regexp="(^$|[0-9]{9})") 
 	@Column(name = "PhoneNumber", nullable = false, length = 15)
 	private String phoneNumber;
@@ -136,7 +139,6 @@ public class Customer implements Serializable{
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}

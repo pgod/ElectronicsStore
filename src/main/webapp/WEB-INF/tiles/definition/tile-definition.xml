@@ -98,4 +98,10 @@
 		<put-attribute name="content" value="/WEB-INF/views/editProduct.jsp" />
 	</definition>
 	
+	<definition name="register" extends="baseLayout">
+		<put-attribute name="title" value="Register" />
+		<put-attribute name="heading" value="Registration form" />
+		<put-attribute name="content" value="/WEB-INF/views/register.jsp" />
+	</definition>
+	
 </tiles-definitions>

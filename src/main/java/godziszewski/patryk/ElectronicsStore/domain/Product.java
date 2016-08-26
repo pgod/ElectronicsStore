@@ -22,38 +22,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
-import godziszewski.patryk.ElectronicsStore.validator.Category;
-import godziszewski.patryk.ElectronicsStore.validator.ProductId;
+
 
 @XmlRootElement
 @Entity
 @Table(name="Products")
 public class Product implements Serializable{
 	private static final long serialVersionUID = -7013955470939575675L;
-	//@Pattern(regexp = "P[0-9]+", message ="{Pattern.Product.productId.validation}")
-	//commented out because of productControllerTest
-	//@ProductId
 	@Id
 	@Column(name = "ProductID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productId;
-	@Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
+	@Size(min = 4, max = 40, message = "{Size.Product.name.validation}")
 	@Column(name = "Name", nullable = false, length = 40)
 	private String name;
 	@Min(value = 0, message = "{Min.Product.UnitPrice.validation}")
-	@Digits(integer = 8, fraction = 2, message = "{Digits.Product.unitPrice.validation}")
+	@Digits(integer = 10, fraction = 2, message = "{Digits.Product.unitPrice.validation}")
 	@NotNull(message = "{NotNull.Product.unitPrice.validation}")
 	@Column(name = "UnitPrice", nullable = false)
 	private BigDecimal unitPrice;
 	@Column(name = "Description", nullable = false, length = 300)
+	@NotBlank(message = "{NotBlank.Product.description.validation}")
 	private String description;
 	@Column(name = "Manufacturer", nullable = false, length = 30)
+	@Length(min = 1, max = 30, message = "{Length.Product.manufacturer.validation}")
 	private String manufacturer;
 	@NotNull(message = "{NotNull.Product.category.validation}")
 	@Length(min = 1, max = 20, message = "{Length.Product.category.validation}")
-	//@Category
 	@Column(name = "Category", nullable = false, length = 20)
 	private String category;
 	@Min(value = 0, message = "{Min.Product.UnitsInStock.validation}")
