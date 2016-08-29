@@ -15,12 +15,12 @@ public class ElectronicsStoreWebInitialiser extends AbstractAnnotationConfigDisp
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
-		FilterRegistration.Dynamic encodingFilter = servletContext.addFilter("encoding-filter", new CharacterEncodingFilter());
-	     encodingFilter.setInitParameter("encoding", "UTF-8");
-	     encodingFilter.setInitParameter("forceEncoding", "true");
-	     encodingFilter.addMappingForUrlPatterns(null, true, "/*");
+		FilterRegistration.Dynamic encodingFilter = servletContext
+				.addFilter("encoding-filter", new CharacterEncodingFilter());
+	    encodingFilter.setInitParameter("encoding", "UTF-8");
+	    encodingFilter.setInitParameter("forceEncoding", "true");
+	    encodingFilter.addMappingForUrlPatterns(null, true, "/*");
 	}
-
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return new Class<?>[] { RootConfig.class };
@@ -42,8 +42,4 @@ public class ElectronicsStoreWebInitialiser extends AbstractAnnotationConfigDisp
 				new MultipartConfigElement("/tmp/images",
 						2097152, 4194304, 0));
 	}
-
-
-	
-
 }

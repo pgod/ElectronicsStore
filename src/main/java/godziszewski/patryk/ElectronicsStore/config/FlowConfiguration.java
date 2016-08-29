@@ -19,12 +19,12 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 
 	@Autowired
 	Validator validator;
-	
 	@Bean
 	public FlowDefinitionRegistry flowRegistry() {
 	    return getFlowDefinitionRegistryBuilder()
+	    		//flow registry makes flow not recognize beans ?
+		    //.setFlowBuilderServices(flowBuilderServices())
 	        .setBasePath("/WEB-INF/flows")
-	        //.setFlowBuilderServices(flowBuilderServices())
 	        .addFlowLocationPattern("/**/*-flow.xml")
 	        .build();
 	}
@@ -32,7 +32,6 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 	public FlowExecutor flowExecutor() {
 	    return getFlowExecutorBuilder(flowRegistry()).build();
 	}
-
 	@Bean
 	public FlowHandlerMapping flowHandlerMapping()
 	{
@@ -47,7 +46,6 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 		fh.setFlowExecutor(flowExecutor());
 		return fh;
 	}
-
 	@Bean
 	public FlowBuilderServices flowBuilderServices()
 	{
@@ -55,6 +53,4 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 				.setValidator(validator)
 				.build();
 	}
-	
-	
 }
