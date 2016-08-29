@@ -7,7 +7,7 @@ Technologies used:
 - JSP
 - Hibernate (validation & orm mapping)
 - Spring Security
-- XML & JSON parsing - for web service
+- XML & JSON parsing - for REST web service (shopping cart implementation)
 - JUnit
 - Mockito
 - Apache Tiles
