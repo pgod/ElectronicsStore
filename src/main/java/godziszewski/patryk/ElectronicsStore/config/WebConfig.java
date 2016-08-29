@@ -33,43 +33,29 @@ import godziszewski.patryk.ElectronicsStore.domain.Product;
 public class WebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ViewResolver viewResolver() {
-	InternalResourceViewResolver resolver =	new InternalResourceViewResolver();
-	resolver.setPrefix("/WEB-INF/views/");
-	resolver.setSuffix(".jsp");
-	resolver.setExposeContextBeansAsAttributes(true); 
-	return resolver;
+		InternalResourceViewResolver resolver =	new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/views/");
+		resolver.setSuffix(".jsp");
+		resolver.setExposeContextBeansAsAttributes(true); 
+		return resolver;
 	}
-	
 	 @Override
-	    public void configurePathMatch(PathMatchConfigurer configurer) {
-
-	        UrlPathHelper urlPathHelper = new UrlPathHelper();
-	        urlPathHelper.setRemoveSemicolonContent(false);
-
-	        configurer.setUrlPathHelper(urlPathHelper);
-	    }
-	
-	
+	public void configurePathMatch(PathMatchConfigurer configurer) {
+		 UrlPathHelper urlPathHelper = new UrlPathHelper();
+	     urlPathHelper.setRemoveSemicolonContent(false);
+	     configurer.setUrlPathHelper(urlPathHelper);
+	 }
 	@Override
 	public Validator getValidator() {
 		return validator();
 	}
-	
-		
-	
-	
-	/*@Override
-	public void configureDefaultServletHandling (
-	DefaultServletHandlerConfigurer configurer) {
-	configurer.enable();
-	}*/
+
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 	    registry.addResourceHandler("/resource/**").addResourceLocations("/resources/");
 	}
 	@Bean
-	TilesConfigurer tilesConfigurer()
-	{
+	TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tiles = new TilesConfigurer();
 		tiles.setDefinitions(new String[] {
 				"/WEB-INF/tiles/definition/tile-definition.xml"
@@ -85,60 +71,50 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return  tv;
 	}
 	@Bean
-	public ResourceBundleMessageSource messageSource()
-	{
+	public ResourceBundleMessageSource messageSource() {
 		ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
 		rb.setBasename("messages");
 		return rb;
 	}
 	@Bean
-	public StandardServletMultipartResolver multipartResolver()
-	{
+	public StandardServletMultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
 	}
-@Bean
-public ContentNegotiatingViewResolver contentResolver()
-{
-	ContentNegotiatingViewResolver cn = new ContentNegotiatingViewResolver();
+	@Bean
+	public ContentNegotiatingViewResolver contentResolver() {
+		ContentNegotiatingViewResolver cn = new ContentNegotiatingViewResolver();
 	
+		List<View> listOfViews = new ArrayList<View>();
+		listOfViews.add(jsonView());
+		listOfViews.add(xmlView());
 	
-	List<View> listOfViews = new ArrayList<View>();
-	listOfViews.add(jsonView());
-	listOfViews.add(xmlView());
-	
-	cn.setDefaultViews(listOfViews);
+		cn.setDefaultViews(listOfViews);
+		
+		return cn;
+	}
 
-
-	return cn;
-}
-
-@Bean
-public MappingJackson2JsonView jsonView()
-{
-	MappingJackson2JsonView mj= new MappingJackson2JsonView();
-	mj.setPrettyPrint(true);
-	return mj;
-}
+	@Bean
+	public MappingJackson2JsonView jsonView() {
+		MappingJackson2JsonView mj= new MappingJackson2JsonView();
+		mj.setPrettyPrint(true);
+		return mj;
+	}
 
 
 
-@Bean
-public MarshallingView xmlView()
-{
-	Jaxb2Marshaller ja = new Jaxb2Marshaller();
-	ja.setClassesToBeBound(Product.class);
-	
-	MarshallingView mv = new MarshallingView(ja);
-	
-	return mv;
-}
-@Bean
-public Validator validator()
-{
-	LocalValidatorFactoryBean lv = new LocalValidatorFactoryBean();
-	lv.setValidationMessageSource(messageSource());
-	return lv;
-}
-
-
+	@Bean
+	public MarshallingView xmlView() {
+		Jaxb2Marshaller ja = new Jaxb2Marshaller();
+		ja.setClassesToBeBound(Product.class);
+		
+		MarshallingView mv = new MarshallingView(ja);
+		
+		return mv;
+	}
+	@Bean
+	public Validator validator() {
+		LocalValidatorFactoryBean lv = new LocalValidatorFactoryBean();
+		lv.setValidationMessageSource(messageSource());
+		return lv;
+	}
 }

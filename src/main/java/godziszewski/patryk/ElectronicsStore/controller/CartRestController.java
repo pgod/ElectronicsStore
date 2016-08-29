@@ -4,14 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import godziszewski.patryk.ElectronicsStore.domain.Cart;
 import godziszewski.patryk.ElectronicsStore.domain.CartItem;
@@ -20,7 +18,7 @@ import godziszewski.patryk.ElectronicsStore.exception.ProductNotFoundException;
 import godziszewski.patryk.ElectronicsStore.service.CartService;
 import godziszewski.patryk.ElectronicsStore.service.ProductService;
 
-@Controller
+@RestController
 @RequestMapping(value = "rest/cart")
 public class CartRestController {
 	@Autowired 
@@ -29,20 +27,20 @@ public class CartRestController {
 	private ProductService productService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody Cart create(@RequestBody Cart cart)
+	public  Cart create(Cart cart)
 	{
 		return cartService.create(cart);
 	}
 	
 	@RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
-	public @ResponseBody Cart read(@PathVariable(value = "cartId") String cartId)
+	public  Cart read(@PathVariable(value = "cartId") String cartId)
 	{
 		return cartService.read(cartId);
 	}
 	@RequestMapping(value = "/{cartId}", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void update(@PathVariable(value = "cartId") String cartId,
-			@RequestBody Cart cart)
+			Cart cart)
 	{
 		cartService.update(cartId, cart);
 	}

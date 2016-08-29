@@ -11,7 +11,7 @@ import godziszewski.patryk.ElectronicsStore.exception.ProductNotFoundException;
 @ControllerAdvice
 public class AppWideExceptionHandler {
 	@ExceptionHandler(ProductNotFoundException.class)
-	public ModelAndView handleError(HttpServletRequest request,
+	public ModelAndView getProductNotFoundException(HttpServletRequest request,
 			ProductNotFoundException exception)
 	{
 		ModelAndView mav = new ModelAndView();

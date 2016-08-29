@@ -20,8 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @Configuration
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	//security filter chain
 
 	@Autowired
 	DataSource dataSource;
