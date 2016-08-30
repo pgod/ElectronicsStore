@@ -2,6 +2,7 @@ package godziszewski.patryk.ElectronicsStore.config;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.UrlPathHelper;
+
 import godziszewski.patryk.ElectronicsStore.domain.Product;
 
 @Configuration
@@ -31,6 +33,7 @@ import godziszewski.patryk.ElectronicsStore.domain.Product;
 @EnableWebMvc
 @ComponentScan(basePackages = "godziszewski.patryk")
 public class WebConfig extends WebMvcConfigurerAdapter {
+	
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver resolver =	new InternalResourceViewResolver();
@@ -106,9 +109,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public MarshallingView xmlView() {
 		Jaxb2Marshaller ja = new Jaxb2Marshaller();
 		ja.setClassesToBeBound(Product.class);
-		
 		MarshallingView mv = new MarshallingView(ja);
-		
 		return mv;
 	}
 	@Bean

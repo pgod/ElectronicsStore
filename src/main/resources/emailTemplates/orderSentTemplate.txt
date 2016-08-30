@@ -1,0 +1,31 @@
+﻿<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+    <body>
+        <h3>Dear ${order.customer.name}, thank you for placing order in our store.</h3>
+ 
+        <div>
+            <p>Order ID: ${order.orderId}.</p>
+            <p>Name: ${order.customer.name}</p>
+            <p>Surname: ${order.customer.surname}</p>
+            <p>StreetName: ${order.customer.streetName}</p>
+            <p>DoorNo: ${order.customer.doorNo}</p>
+            <p>AreaName: ${order.customer.areaName}</p>
+            <p>State: ${order.customer.state}</p>
+            <p>Country: ${order.customer.country}</p>
+            <p>ZipCode: ${order.customer.zipCode}</p>
+            <p>Phone Number: ${order.customer.phoneNumber}</p>
+        </div>
+		<div>
+		<#list order.cart.cartItems?values as item>
+			<p>Item name: ${item.product.name}</p>
+			<p>Price: ${item.totalPrice}</p>
+			<p>Quantity: ${item.quantity}</p>
+		</#list> 
+		</div>
+		<p>Total price: ${order.totalPrice}</p>
+
+        <span>Electronics Store</span>
+    </body>
+</html>
