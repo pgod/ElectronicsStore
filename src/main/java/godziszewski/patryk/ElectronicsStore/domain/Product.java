@@ -25,6 +25,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -65,8 +66,8 @@ public class Product implements Serializable{
 	private boolean discontinued;
 	//does problems with cart overview
 	
-	//has to be fetched eagerly for REST services
-	@OneToMany(mappedBy = "product", fetch=FetchType.EAGER)
+	@JsonIgnore
+	@OneToMany(mappedBy = "product", fetch=FetchType.LAZY)
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 	//product images are not stored in database
 	@Transient
