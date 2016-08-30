@@ -34,11 +34,8 @@ public class Order implements Serializable{
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "CustomerID")
 	private Customer customer;
-
-	
 	@OneToMany(mappedBy = "order")
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
-	
 	@DateTimeFormat(pattern="dd/MM/yyyy") 
     @Column(name = "OrderDate", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
