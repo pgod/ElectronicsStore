@@ -14,3 +14,5 @@ Technologies used:
 - Spring WebFlow
 - MySQL
 - Joda Time
+- JavaMail
+- Apache FreeMarker
