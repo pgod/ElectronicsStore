@@ -1,9 +1,5 @@
 package godziszewski.patryk.ElectronicsStore.config;
 
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.validation.Validator;
@@ -13,7 +9,7 @@ import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
 import org.springframework.webflow.executor.FlowExecutor;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
-
+import org.springframework.webflow.security.SecurityFlowExecutionListener;
 
 public class FlowConfiguration extends AbstractFlowConfiguration {
 
@@ -30,7 +26,9 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 	}
 	@Bean
 	public FlowExecutor flowExecutor() {
-	    return getFlowExecutorBuilder(flowRegistry()).build();
+	    return getFlowExecutorBuilder(flowRegistry())
+	    			.addFlowExecutionListener(securityFlowExecutionListener())
+	    			.build();
 	}
 	@Bean
 	public FlowHandlerMapping flowHandlerMapping()
@@ -52,5 +50,10 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 		return getFlowBuilderServicesBuilder()
 				.setValidator(validator)
 				.build();
+	}
+	@Bean
+	public SecurityFlowExecutionListener securityFlowExecutionListener()
+	{
+		return new SecurityFlowExecutionListener();
 	}
 }
