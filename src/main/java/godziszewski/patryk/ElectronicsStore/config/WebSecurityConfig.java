@@ -6,6 +6,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +16,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 
 
@@ -26,36 +30,37 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	UserDetailsService userDetailsService;
+	@Autowired
+	PersistentTokenRepository tokenRepository;
 
-	 @Override
-	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		 auth.authenticationProvider(authProvider());
-	    }
+		 auth.userDetailsService(userDetailsService);
+	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	http
-	.csrf()
-	.disable()
-	.formLogin()
-	.loginPage("/login").failureUrl("/loginfailed").successForwardUrl("/products")
-	.and()
-	.logout().logoutSuccessUrl("/products")
-	.and()
-	.rememberMe()
-	.tokenValiditySeconds(2419200) // 4 weeks
-	.key("ElectronicsStoreLoginKey")
-	.and()
-	.requiresChannel()
-	.antMatchers("/login").requiresSecure()
-	.and()
-	.authorizeRequests()
-	.antMatchers("/products/add").hasRole("ADMIN")
-	.and()
-	.requiresChannel()
-	.antMatchers("/products/add").requiresSecure()
-	.and()
-	.requiresChannel()
-	.antMatchers("/").requiresInsecure();
+		http
+		.csrf()
+		.disable()
+		.formLogin()
+		.loginPage("/login").failureUrl("/loginfailed").successForwardUrl("/products")
+		.and()
+		.logout().logoutSuccessUrl("/products")
+		.and()
+		.rememberMe()
+		.rememberMeParameter("remember-me")
+		.tokenRepository(tokenRepository)
+		.tokenValiditySeconds(2419200) // 4 weeks
+		.and()
+		.requiresChannel()
+		.antMatchers("/login").requiresSecure()
+		.and()
+		.authorizeRequests()
+		.antMatchers("/products/add").hasRole("ADMIN")
+		.and()
+		.requiresChannel()
+		.antMatchers("/products/add").requiresSecure();
 	}
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -68,5 +73,14 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    authProvider.setPasswordEncoder(passwordEncoder());
 	    return authProvider;
 	}
-	
+	@Bean
+	public PersistentTokenBasedRememberMeServices getPersistentTokenBasedRememberMeServices() {
+		PersistentTokenBasedRememberMeServices tokenBasedservice = new PersistentTokenBasedRememberMeServices(
+	    "remember-me", userDetailsService, tokenRepository);
+	    return tokenBasedservice;
+	}
+	@Bean
+	public AuthenticationTrustResolver getAuthenticationTrustResolver() {
+	    return new AuthenticationTrustResolverImpl();
+	}
 }
