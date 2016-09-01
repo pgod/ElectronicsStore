@@ -57,8 +57,4 @@ public class PersistentLogin implements Serializable {
 	public void setLastUsed(Date lastUsed) {
 		this.lastUsed = lastUsed;
 	}
- 
-  
-     
-
 }

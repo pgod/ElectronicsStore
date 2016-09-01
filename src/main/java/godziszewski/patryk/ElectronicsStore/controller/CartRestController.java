@@ -1,9 +1,12 @@
 package godziszewski.patryk.ElectronicsStore.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,19 +49,23 @@ public class CartRestController {
 	}
 	@RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable(value = "cartId") String cartId)
+	public void delete(@PathVariable(value = "cartId") String cartId,
+			HttpServletRequest request, HttpServletResponse response)
 	{
 		cartService.delete(cartId);
+		deleteCartCookie(request, response);
 	}
 	@RequestMapping(value = "/add/{productId}", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void addItem(@PathVariable Integer productId, HttpServletRequest request)
+	public void addItem(@PathVariable Integer productId, HttpServletRequest request,
+			@CookieValue(name = "cartId", required = false) String cookieValue,
+			HttpServletResponse response)
 	{
-		String sessionId = request.getSession().getId();
-		Cart cart = cartService.read(sessionId);
-		if(cart== null) 
+		Cart cart = cartService.read(cookieValue);
+		if(cart == null) 
 		{
-		cart = cartService.create(new Cart(sessionId));
+			cookieValue = this.createCartCookie(2419200, request, response); //4 weeks
+			cart = cartService.create(new Cart(cookieValue));
 		}
 		Product product = productService.getProductById(productId);
 		if(product == null) 
@@ -66,17 +73,17 @@ public class CartRestController {
 		throw new IllegalArgumentException(new ProductNotFoundException(productId));
 		}
 		cart.addCartItem(new CartItem(product));
-		cartService.update(sessionId, cart);
+		cartService.update(cookieValue, cart);
 	}
 	@RequestMapping(value = "/remove/{productId}", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void removeItem(@PathVariable Integer productId, HttpServletRequest request)
+	public void removeItem(@PathVariable Integer productId, HttpServletRequest request,
+			@CookieValue(name = "cartId") String cookieValue)
 	{
-		String sessionId = request.getSession().getId();
-		Cart cart = cartService.read(sessionId);
-		if(cart== null) 
+		Cart cart = cartService.read(cookieValue);
+		if(cart == null) 
 		{
-		cart = cartService.create(new Cart(sessionId));
+		cart = cartService.create(new Cart(cookieValue));
 		}
 		Product product = productService.getProductById(productId);
 		if(product == null) 
@@ -84,8 +91,25 @@ public class CartRestController {
 		throw new IllegalArgumentException(new ProductNotFoundException(productId));
 		}
 		cart.removeCartItem(new CartItem(product));
-		cartService.update(sessionId, cart);
+		cartService.update(cookieValue, cart);
 	}
+	private String createCartCookie(int maxAge,HttpServletRequest request, HttpServletResponse response)
+	{
+		String sessionId= request.getSession().getId();
+		Cookie cookie = new Cookie("cartId", sessionId);
+		cookie.setPath(request.getServletContext().getContextPath()+"/");
+		cookie.setMaxAge(maxAge);
+		response.addCookie(cookie);
+		return sessionId;
+	}
+	private void deleteCartCookie(HttpServletRequest request, HttpServletResponse response)
+	{
+		Cookie cookie = new Cookie("cartId", null);  // Not necessary, but saves bandwidth.
+		cookie.setPath(request.getServletContext().getContextPath()+"/");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+	}
+	
 	@ExceptionHandler(IllegalArgumentException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason="Incorrect request, check request data")
 	public void handleClientErrors(Exception ex) { }
