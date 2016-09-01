@@ -42,7 +42,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		resolver.setExposeContextBeansAsAttributes(true); 
 		return resolver;
 	}
-	 @Override
+	@Override
 	public void configurePathMatch(PathMatchConfigurer configurer) {
 		 UrlPathHelper urlPathHelper = new UrlPathHelper();
 	     urlPathHelper.setRemoveSemicolonContent(false);
