@@ -87,9 +87,10 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationTrustResolver getAuthenticationTrustResolver() {
 	    return new AuthenticationTrustResolverImpl();
 	}
-	private CsrfTokenRepository csrfTokenRepository() {
+	@Bean
+	public CsrfTokenRepository csrfTokenRepository() {
 		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
 		repository.setHeaderName("X-XSRF-TOKEN");
 		return repository;
-		}
+	}
 }
