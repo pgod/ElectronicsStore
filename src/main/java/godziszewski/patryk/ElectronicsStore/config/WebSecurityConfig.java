@@ -18,8 +18,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
-
+import godziszewski.patryk.ElectronicsStore.filter.CsrfHeaderFilter;
 
 @EnableWebSecurity
 @Configuration
@@ -40,12 +43,14 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		.csrf()
-		.disable()
+		.csrf().csrfTokenRepository(csrfTokenRepository())
+		.and()
+		.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
 		.formLogin()
 		.loginPage("/login").failureUrl("/loginfailed").successForwardUrl("/products")
 		.and()
-		.logout().logoutSuccessUrl("/products")
+		.logout()
+		.logoutUrl("/logout")
 		.and()
 		.rememberMe()
 		.rememberMeParameter("remember-me")
@@ -82,4 +87,9 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationTrustResolver getAuthenticationTrustResolver() {
 	    return new AuthenticationTrustResolverImpl();
 	}
+	private CsrfTokenRepository csrfTokenRepository() {
+		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+		repository.setHeaderName("X-XSRF-TOKEN");
+		return repository;
+		}
 }
