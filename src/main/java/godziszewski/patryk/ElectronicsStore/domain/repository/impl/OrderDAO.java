@@ -16,5 +16,4 @@ public class OrderDAO extends AbstractDAO<Integer, Order> implements OrderReposi
 	{
 		return getByKey(id);
 	}
-
 }

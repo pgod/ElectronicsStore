@@ -11,6 +11,5 @@ public class OrderDetailsDAO extends AbstractDAO<Integer, OrderDetails> implemen
 	@Override
 	public void save(OrderDetails orderDetails) {
 		persist(orderDetails);
-		
 	}
 }
