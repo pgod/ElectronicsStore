@@ -26,6 +26,7 @@ public class EmailConfig {
         		environment.getRequiredProperty("mail.port")));
         mailSender.setUsername(environment.getRequiredProperty("mail.username"));
         mailSender.setPassword(environment.getRequiredProperty("mail.password"));
+        mailSender.setDefaultEncoding("UTF-8");
          
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", environment.getRequiredProperty("mail.smtp.starttls.enable"));
