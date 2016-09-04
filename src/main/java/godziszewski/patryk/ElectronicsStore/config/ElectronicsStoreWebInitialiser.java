@@ -19,7 +19,9 @@ public class ElectronicsStoreWebInitialiser extends AbstractAnnotationConfigDisp
 				.addFilter("encoding-filter", new CharacterEncodingFilter());
 	    encodingFilter.setInitParameter("encoding", "UTF-8");
 	    encodingFilter.setInitParameter("forceEncoding", "true");
-	    encodingFilter.addMappingForUrlPatterns(null, true, "/*");
+	    /*the value false ensures that the CharacterEncodingFilter is the first filter in the chain,
+	    the value true adds the filter to the end of the filterChain*/
+	    encodingFilter.addMappingForUrlPatterns(null, false, "/*");
 	}
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
