@@ -34,13 +34,13 @@ public class CartRestControllerTest {
 	@Test
 	public void read_method_should_return_correct_cart_Json_object() throws Exception {
 
-	this.mockMvc.perform(put("/rest/cart/add/1234").session(session))
+	this.mockMvc.perform(put("/rest/cart/add/1").session(session))
 	.andExpect(status().is(204));
 	
 	this.mockMvc.perform(get("/rest/cart/"+ session.getId()).session(session))
 	.andExpect(status().isOk())
-	.andExpect(jsonPath("$.cartItems.1234.product.productId").
-	value(1234));
+	.andExpect(jsonPath("$.cartItems.1.product.productId").
+	value(1));
 	}
 	
 }
