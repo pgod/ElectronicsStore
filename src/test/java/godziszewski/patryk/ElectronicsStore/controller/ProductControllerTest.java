@@ -1,10 +1,17 @@
 package godziszewski.patryk.ElectronicsStore.controller;
 
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,18 +19,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
 
 import godziszewski.patryk.ElectronicsStore.domain.Product;
 import godziszewski.patryk.ElectronicsStore.service.ProductService;
-
-
-
-
 
 public class ProductControllerTest {
 	@Test
@@ -136,7 +137,7 @@ public class ProductControllerTest {
 		
 	}
 	@Test
-	  public void testShowNewProductForm() throws Exception {
+	public void testShowNewProductForm() throws Exception {
 		ProductService mockService = mock(ProductService.class);
 		ProductController controller = new ProductController(mockService);
 		
@@ -145,29 +146,23 @@ public class ProductControllerTest {
 	           .andExpect(view().name("addProduct"));
 	  }
 	 @Test
-	  public void testProcessNewProductForm() throws Exception {
-	    
+	 public void testProcessNewProductForm() throws Exception {
 		 ProductService mockService = mock(ProductService.class);
 		 
-		 
-		 
 		 ProductController controller = new ProductController(mockService);
-		 Product product = new Product(1234, "Dell Inspiron", new BigDecimal("1500"));
+		 Product product = new Product(null, "Dell Inspiron", new BigDecimal("1500"));
 		 product.setCategory("laptop");
 		 product.setManufacturer("dell");
 		 product.setUnitsInStock(100);
+		 product.setDescription("modern design");
 	    
-	    
-	    MockMvc mockMvc = standaloneSetup(controller)
+		 MockMvc mockMvc = standaloneSetup(controller)
 	    		.build();
-	    
-	  
-
-	    mockMvc.perform(post("/products/add")
-	    		.param("productId", "1234")
+		 mockMvc.perform(post("/products/add")
 	    		.param("name", "Dell Inspiron")
 	    		.param("unitPrice", "1500")
 	    		.param("category", "laptop")
+	    		.param("description", "modern design")
 	    		.param("manufacturer", "dell")
 	    		.param("unitsInStock", "100"))
 	    		.andExpect(redirectedUrl("/products"));
@@ -177,10 +172,10 @@ public class ProductControllerTest {
 
 	private List<Product> createProductList(int count) {
 		List<Product> products = new ArrayList<Product>();
-		for (int i=0; i < count; i++) {
+		for (int i=0; i < count; i++) 
+		{
 			products.add(new Product());
 		}
 		return products;
 		}
-
 }
