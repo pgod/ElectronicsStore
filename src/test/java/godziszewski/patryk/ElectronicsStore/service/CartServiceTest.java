@@ -88,7 +88,6 @@ public class CartServiceTest {
 	{
 		InvalidCartException cartException=null;
 		Cart cart = new Cart("1");
-		cartService.create(cart);
 		
 		when(cartRepository.read(cart.getCartId()))
 		.thenReturn(null);
