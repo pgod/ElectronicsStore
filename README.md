@@ -1,11 +1,12 @@
 # ElectronicsStore
 
-Basic and neat webstore, created with Spring MVC.
+Basic and neat webstore, created with Spring MVC with all configuration created in Java config classes.
+
 Technologies used:
-- Spring
+- Spring 4
 - Spring MVC
 - JSP
-- Hibernate (validation & orm mapping)
+- Hibernate 5 (orm mapping)
 - Spring Security
 - XML & JSON parsing - for REST web service (shopping cart implementation)
 - JUnit
