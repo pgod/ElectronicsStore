@@ -64,8 +64,6 @@ public class Product implements Serializable{
 	private long unitsInStock;
 	@Column(name = "Discontinued", nullable = false)
 	private boolean discontinued;
-	//does problems with cart overview
-	
 	@JsonIgnore
 	@OneToMany(mappedBy = "product", fetch=FetchType.LAZY)
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
