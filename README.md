@@ -8,7 +8,7 @@ Technologies used:
 - JSP
 - Hibernate 5 (orm mapping)
 - Spring Security
-- XML & JSON parsing - for REST web service (shopping cart implementation)
+- XML & JSON parsing - for REST web service (shopping cart, products can be retrieved as JSON and XML too)
 - JUnit
 - Mockito
 - Apache Tiles
@@ -17,3 +17,4 @@ Technologies used:
 - Joda Time
 - JavaMail
 - Apache FreeMarker
+- JSR-303 , Hibernate, and created validation
