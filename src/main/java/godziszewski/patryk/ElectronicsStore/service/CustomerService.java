@@ -7,4 +7,5 @@ public interface CustomerService {
 	void update(Customer customer);
 	void create(Customer customer);
 	Customer getCustomerById(Integer id);
+	void updateAddressDetails(Customer customer);
 }

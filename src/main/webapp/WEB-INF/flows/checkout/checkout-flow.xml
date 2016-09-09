@@ -19,14 +19,18 @@
 			<transition to="customer"
 			on-exception="org.springframework.expression.spel.SpelEvaluationException"/>
 			<transition to="customer" />	
-		</action-state>
+	</action-state>
 	
 
 	<subflow-state id="customer" subflow="checkout/customer">
       <input name="order" value="order"/>
-      <transition on="customerReady" to="orderConfirmation" />
+      <transition on="customerReady" to="updateCustomerAddress" />
     </subflow-state>
 
+	<action-state id="updateCustomerAddress">
+		<evaluate expression="customerServiceImpl.updateAddressDetails(order.customer)" />
+		<transition to="orderConfirmation" />	
+	</action-state>
 
 	<view-state id="orderConfirmation">
 		<transition on="orderConfirmed" to="processOrder" />
@@ -37,8 +41,6 @@
 		<evaluate expression="orderServiceImpl.saveOrder(order)" />
 		<transition to="sendEmailConfirmation" />
 	</action-state>
-	
-
 	
 	<view-state id="InvalidCartWarning">
 		<transition to="endState"/>
@@ -52,8 +54,6 @@
 	<view-state id="thankCustomer" model="order">
 		<transition to="endState"/>
 	</view-state>
-	
-	
 
 	<end-state id="endState"/>	
 
