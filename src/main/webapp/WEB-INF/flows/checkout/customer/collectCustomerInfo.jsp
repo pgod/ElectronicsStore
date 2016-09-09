@@ -23,6 +23,8 @@
 			<fieldset>
 				<legend>Customer Details</legend>
 
+				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
+				
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="name"><spring:message code="editCustomer.form.name.label"/></label>
 					<div class="col-lg-10">

@@ -16,7 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
@@ -33,6 +34,7 @@ public class Order implements Serializable{
 	private Cart cart;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "CustomerID")
+	@Valid
 	private Customer customer;
 	@OneToMany(mappedBy = "order")
 	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
@@ -44,6 +46,7 @@ public class Order implements Serializable{
     @Column(name = "ShippingDate", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	private LocalDate shippingDate;
+	@Min(value = 0, message = "{Min.Order.totalPrice.validation}")
 	@Column(name = "TotalPrice", nullable = false)
 	private BigDecimal totalPrice;
 	public Order()
@@ -64,24 +67,18 @@ public class Order implements Serializable{
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
-
-	
 	public Customer getCustomer() {
 		return customer;
 	}
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
-
 	public LocalDate getShippingDate() {
 		return shippingDate;
 	}
 	public void setShippingDate(LocalDate shippingDate) {
 		this.shippingDate = shippingDate;
-	}
-	
-	
+	}	
 	public Set<OrderDetails> getOrderDetails() {
 		return orderDetails;
 	}
@@ -124,5 +121,4 @@ public class Order implements Serializable{
 			return false;
 		return true;
 	}
-	
 }

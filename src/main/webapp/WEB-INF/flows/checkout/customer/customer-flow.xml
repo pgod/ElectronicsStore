@@ -7,8 +7,18 @@
 	<input name="order" required="true"/>	
 		
 	<view-state id="collectCustomerInfo" view="collectCustomerInfo.jsp" model="order">
+	<binder>
+        <binding property="customer.name" required="true" />
+        <binding property="customer.surname" required="true" />
+        <binding property="customer.streetName" required="true" />
+        <binding property="customer.doorNo" required="true" />
+        <binding property="customer.zipCode" required="true" />
+        <binding property="customer.areaName" required="true" />
+        <binding property="customer.country" required="true" />
+        <binding property="customer.phoneNumber" required="true" /> 
+    </binder>
 		<transition on="customerInfoCollected" to="customerReady" />
-		<transition on="cancel" to="cancel"/>
+		<transition on="cancel" to="cancel"  bind="false"/>
 	</view-state>
 	
 	<end-state id="cancel" />

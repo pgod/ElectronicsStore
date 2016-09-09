@@ -59,4 +59,21 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerRepository.getCustomerById(id);
 	}
 
+	@Override
+	public void updateAddressDetails(Customer customer) {
+		Customer entity = customerRepository.getCustomerByEmail(customer.getEmail());
+        if(entity == null)
+        {
+        	throw new CustomerNotFoundException(customer.getEmail());
+        }
+        entity.setName(customer.getName());
+        entity.setSurname(customer.getSurname());
+        entity.setStreetName(customer.getStreetName());
+        entity.setDoorNo(customer.getDoorNo());
+        entity.setAreaName(customer.getAreaName());
+        entity.setState(customer.getState());
+        entity.setCountry(customer.getCountry());
+        entity.setZipCode(customer.getZipCode());
+        entity.setPhoneNumber(customer.getPhoneNumber());
+	}
 }

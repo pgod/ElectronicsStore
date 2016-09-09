@@ -12,12 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import godziszewski.patryk.ElectronicsStore.validator.CustomerEmail;
+import godziszewski.patryk.ElectronicsStore.validator.ValidateOnCreationOnly;
 
 @Entity
 @Table(name="Customers")
@@ -27,35 +31,42 @@ public class Customer implements Serializable{
 	@Column(name = "CustomerID", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
+	//can not duplicate emails in database
+	@Size(min = 3, max = 60, message = "{Size.Customer.email.validation}")
+	@CustomerEmail(groups = ValidateOnCreationOnly.class)
 	@Email
 	@Column(name = "Email", nullable = false, length = 60)
-	//can not duplicate emails in database
-	@CustomerEmail
-	@Size(min = 3, max = 60, message = "{Size.Customer.email.validation}")
 	private String email;
 	@NotNull
-	@Column(name = "Password", nullable = false, length = 60)
 	@Size(min = 5, max = 60, message = "{Size.Customer.password.validation}")
+	@Column(name = "Password", nullable = false, length = 60)
 	private String password;
-	@Size(min = 3, max = 50, message = "{Size.Customer.name.validation}")
+	@Size(min = 3, max = 30, message = "{Size.Customer.name.validation}")
 	@Column(name = "Name", length = 30)
 	private String name;
-	@Size(min = 3, max = 50, message = "{Size.Customer.surname.validation}")
+	@Size(min = 3, max = 30, message = "{Size.Customer.surname.validation}")
 	@Column(name = "Surname", length = 30)
 	private String surname;
+	@Size(min = 3, max = 50, message = "{Size.Customer.streetName.validation}")
 	@Column(name = "StreetName", length = 50)
 	private String streetName;
+	@Min(value = 1, message = "{Min.Customer.doorNo.validation}")
 	@Column(name = "DoorNo")
 	private String doorNo;
+	@Size(min = 3, max = 20, message = "{Size.Customer.areaName.validation}")
 	@Column(name = "AreaName", length = 20)
 	private String areaName;
+	@Size(min = 3, max = 50, message = "{Size.Customer.state.validation}")
 	@Column(name = "State", length = 50)
 	private String state;
+	@Size(min = 3, max = 25, message = "{Size.Customer.country.validation}")
 	@Column(name = "Country", length = 25)
 	private String country;
+	@Size(min = 2, max = 10, message = "{Size.Customer.zipCode.validation}")
 	@Column(name = "ZipCode", length = 10)
 	private String zipCode;
-	@Pattern(regexp="(^$|[0-9]{9})") 
+	@NotEmpty(message = "{NotEmpty.Customer.phoneNumber.validation}")
+	@Pattern(regexp="(^$|[0-9]{9})", message = "{Pattern.Customer.phoneNumber.validation}") 
 	@Column(name = "PhoneNumber", nullable = false, length = 15)
 	private String phoneNumber;
 	
@@ -178,5 +189,4 @@ public class Customer implements Serializable{
 			return false;
 		return true;
 	}
-	
 }

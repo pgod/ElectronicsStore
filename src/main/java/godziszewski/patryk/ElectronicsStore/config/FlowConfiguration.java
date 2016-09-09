@@ -18,8 +18,7 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 	@Bean
 	public FlowDefinitionRegistry flowRegistry() {
 	    return getFlowDefinitionRegistryBuilder()
-	    		//flow registry makes flow not recognize beans ?
-		    //.setFlowBuilderServices(flowBuilderServices())
+		    .setFlowBuilderServices(flowBuilderServices())
 	        .setBasePath("/WEB-INF/flows")
 	        .addFlowLocationPattern("/**/*-flow.xml")
 	        .build();
@@ -47,9 +46,11 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 	@Bean
 	public FlowBuilderServices flowBuilderServices()
 	{
-		return getFlowBuilderServicesBuilder()
-				.setValidator(validator)
-				.build();
+		FlowBuilderServices fbs = getFlowBuilderServicesBuilder().build();
+		fbs.setApplicationContext(getApplicationContext());
+		fbs.setValidator(validator);
+		return fbs;
+
 	}
 	@Bean
 	public SecurityFlowExecutionListener securityFlowExecutionListener()
