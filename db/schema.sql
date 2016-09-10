@@ -11,7 +11,7 @@ CREATE TABLE  Products (
   Discontinued boolean NOT NULL,
   CHECK (UnitPrice>=0),
   CHECK (UnitsInStock>=0)
-) ;
+);
 
 CREATE TABLE  Customers (
   CustomerID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

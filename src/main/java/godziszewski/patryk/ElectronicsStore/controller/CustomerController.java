@@ -51,6 +51,8 @@ public class CustomerController {
 				!passwordEncoder.matches(customer.getPassword(),
 						customerService.getCustomerByEmail(activeUser.getUsername()).getPassword()))
 		{
+			customer.setPassword("");
+			model.addAttribute("error", "true");
 			return "userDetails";
 		}
 		String userEmail = activeUser.getUsername();
