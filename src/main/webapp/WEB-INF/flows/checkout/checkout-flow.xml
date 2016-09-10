@@ -5,23 +5,31 @@
   http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<var name="order" class="godziszewski.patryk.ElectronicsStore.domain.Order" />
+	
 	<action-state id="addCartToOrder">
 		<secured attributes="ROLE_USER" />
 		<evaluate expression="cartServiceImpl.validate(requestParameters.cartId)"
 			result="order.cart" />
 		<transition to="InvalidCartWarning"
 			on-exception="godziszewski.patryk.ElectronicsStore.exception.InvalidCartException" />
-		<transition to="loadCustomerAddress" />
-	</action-state>
-		<action-state id="loadCustomerAddress">
-		<evaluate expression="customerServiceImpl.getCustomerByEmail(currentUser.name)"
-			result="order.customer" />
-			<transition to="customer"
-			on-exception="org.springframework.expression.spel.SpelEvaluationException"/>
-			<transition to="customer" />	
+		<transition to="checkQuantity" />
 	</action-state>
 	
-
+	<action-state id="checkQuantity">
+		<evaluate expression="orderServiceImpl.checkQuantity(order)" />
+		<transition to="NotEnoughProductsInStock"
+		on-exception="java.lang.IllegalArgumentException" />
+		<transition to="loadCustomerAddress" />	
+	</action-state>
+	
+	<action-state id="loadCustomerAddress">
+		<evaluate expression="customerServiceImpl.getCustomerByEmail(currentUser.name)"
+			result="order.customer" />
+		<transition to="customer"
+			on-exception="org.springframework.expression.spel.SpelEvaluationException"/>
+		<transition to="customer" />	
+	</action-state>
+	
 	<subflow-state id="customer" subflow="checkout/customer">
       <input name="order" value="order"/>
       <transition on="customerReady" to="updateCustomerAddress" />
@@ -33,11 +41,11 @@
 	</action-state>
 
 	<view-state id="orderConfirmation">
-		<transition on="orderConfirmed" to="processOrder" />
+		<transition on="orderConfirmed" to="saveOrder" />
 		<transition on="backToCustomerInfo" to="customer" />
 	</view-state>
 	
-	<action-state id="processOrder">
+	<action-state id="saveOrder">
 		<evaluate expression="orderServiceImpl.saveOrder(order)" />
 		<transition to="sendEmailConfirmation" />
 	</action-state>
@@ -45,6 +53,11 @@
 	<view-state id="InvalidCartWarning">
 		<transition to="endState"/>
 	</view-state>
+	
+	<view-state id="NotEnoughProductsInStock">
+		<transition to="endState"/>
+	</view-state>
+	
 	
 	<action-state id="sendEmailConfirmation">
 		<evaluate expression="mailServiceImpl.sendEmail(order)" />
@@ -62,5 +75,5 @@
 	<global-transitions>
 		<transition on = "cancel" to="cancelCheckout" />
 	</global-transitions>
-
+	
 </flow>

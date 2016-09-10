@@ -30,17 +30,21 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDetailsService orderDetailsService;
 
 
-	public void processOrder(Integer productId, int count) {
-		Product productById=productService.
-				getProductById(productId);
-		if(productById.getUnitsInStock() < count)
+	public void checkQuantity(Order order) {
+		Cart cart=order.getCart();
+		for (Map.Entry<Integer, CartItem> entry : cart.getCartItems().entrySet())
 		{
-			throw new IllegalArgumentException("Unfortunately, we do not  have enough units in stock. "
-					+ "Current amount of items in stock: "+productById.getUnitsInStock());
-		}
-		
+			Product product = entry.getValue().getProduct();
+			int quantity = entry.getValue().getQuantity();
+			Product productById=productService.
+					getProductById(product.getProductId());
+			if(productById.getUnitsInStock() < quantity)
+			{
+				throw new IllegalArgumentException("Unfortunately, we do not  have enough units in stock. "
+						+ "Current amount of items in stock: "+productById.getUnitsInStock());
+			}
+		}		
 	}
-
 	public void saveOrder(Order order) {
 		Cart cart=order.getCart();
 		order.setTotalPrice(cart.getGrandTotal());
