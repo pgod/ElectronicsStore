@@ -35,8 +35,7 @@ public class EmailConfig {
         javaMailProperties.put("mail.debug", environment.getRequiredProperty("mail.debug"));//Prints out everything on screen
          
         mailSender.setJavaMailProperties(javaMailProperties);
-        return mailSender;
-		
+        return mailSender;	
 	}
 	@Bean
     public FreeMarkerConfigurationFactoryBean freeMarkerConfiguration() {

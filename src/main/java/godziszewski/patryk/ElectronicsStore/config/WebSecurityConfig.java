@@ -39,7 +39,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		 auth.authenticationProvider(authProvider());
 		 auth.userDetailsService(userDetailsService);
-	}
+		 }
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -65,32 +65,32 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.requiresChannel()
 		.antMatchers("/products/add").requiresSecure();
-	}
+		}
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
-	}
+	    }
 	@Bean
 	public DaoAuthenticationProvider authProvider() {
 	    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 	    authProvider.setUserDetailsService(userDetailsService);
 	    authProvider.setPasswordEncoder(passwordEncoder());
 	    return authProvider;
-	}
+	    }
 	@Bean
 	public PersistentTokenBasedRememberMeServices getPersistentTokenBasedRememberMeServices() {
 		PersistentTokenBasedRememberMeServices tokenBasedservice = new PersistentTokenBasedRememberMeServices(
 	    "remember-me", userDetailsService, tokenRepository);
 	    return tokenBasedservice;
-	}
+	    }
 	@Bean
 	public AuthenticationTrustResolver getAuthenticationTrustResolver() {
 	    return new AuthenticationTrustResolverImpl();
-	}
+	    }
 	@Bean
 	public CsrfTokenRepository csrfTokenRepository() {
 		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
 		repository.setHeaderName("X-XSRF-TOKEN");
 		return repository;
-	}
+		}
 }

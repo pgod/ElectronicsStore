@@ -27,13 +27,12 @@ public class DataBaseConfig {
 	Environment environment;
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
-       LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-       factoryBean.setDataSource(dataSource());
-       factoryBean.setPackagesToScan("godziszewski.patryk.ElectronicsStore.domain");
-       factoryBean.setHibernateProperties(hibernateProperties());
-
-       return factoryBean;
-       }
+		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+		factoryBean.setDataSource(dataSource());
+		factoryBean.setPackagesToScan("godziszewski.patryk.ElectronicsStore.domain");
+		factoryBean.setHibernateProperties(hibernateProperties());
+		return factoryBean;
+		}
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dm = new DriverManagerDataSource();
@@ -42,8 +41,7 @@ public class DataBaseConfig {
 		dm.setUsername(environment.getRequiredProperty("jdbc.username"));
 		dm.setPassword(environment.getRequiredProperty("jdbc.password"));
 		return dm;
-	}
-	
+		}
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
 	    properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
@@ -51,15 +49,15 @@ public class DataBaseConfig {
 	    properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
 	    return properties;
 	    }
-	  @Bean
-	  @Autowired
-	  public HibernateTransactionManager transactionManager(SessionFactory s) {
-	     HibernateTransactionManager txManager = new HibernateTransactionManager();
-	     txManager.setSessionFactory(s);
-	     return txManager;
-	    }
-	  @Bean
-	  public BeanPostProcessor persistenceTranslation() {
-	  return new PersistenceExceptionTranslationPostProcessor();
-	  }
+	@Bean
+	@Autowired
+	public HibernateTransactionManager transactionManager(SessionFactory s) {
+		HibernateTransactionManager txManager = new HibernateTransactionManager();
+		txManager.setSessionFactory(s);
+		return txManager;
+		}
+	@Bean
+	public BeanPostProcessor persistenceTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+		}
 }
