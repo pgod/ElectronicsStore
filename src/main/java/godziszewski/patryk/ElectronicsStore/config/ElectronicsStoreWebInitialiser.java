@@ -5,8 +5,6 @@ import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-
-
 public class ElectronicsStoreWebInitialiser extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override

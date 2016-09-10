@@ -17,44 +17,39 @@ public class FlowConfiguration extends AbstractFlowConfiguration {
 	Validator validator;
 	@Bean
 	public FlowDefinitionRegistry flowRegistry() {
-	    return getFlowDefinitionRegistryBuilder()
-		    .setFlowBuilderServices(flowBuilderServices())
-	        .setBasePath("/WEB-INF/flows")
-	        .addFlowLocationPattern("/**/*-flow.xml")
-	        .build();
-	}
+		return getFlowDefinitionRegistryBuilder()
+				.setFlowBuilderServices(flowBuilderServices())
+				.setBasePath("/WEB-INF/flows")
+				.addFlowLocationPattern("/**/*-flow.xml")
+				.build();
+		}
 	@Bean
 	public FlowExecutor flowExecutor() {
 	    return getFlowExecutorBuilder(flowRegistry())
-	    			.addFlowExecutionListener(securityFlowExecutionListener())
-	    			.build();
-	}
+	    		.addFlowExecutionListener(securityFlowExecutionListener())
+	    		.build();
+	    }
 	@Bean
-	public FlowHandlerMapping flowHandlerMapping()
-	{
+	public FlowHandlerMapping flowHandlerMapping() {
 		FlowHandlerMapping fh = new FlowHandlerMapping();
 		fh.setFlowRegistry(flowRegistry());
 		return fh;
-	}
+		}
 	@Bean
-	public FlowHandlerAdapter flowHandlerAdapter()
-	{
+	public FlowHandlerAdapter flowHandlerAdapter() {
 		FlowHandlerAdapter fh = new FlowHandlerAdapter();
 		fh.setFlowExecutor(flowExecutor());
 		return fh;
-	}
+		}
 	@Bean
-	public FlowBuilderServices flowBuilderServices()
-	{
+	public FlowBuilderServices flowBuilderServices() {
 		FlowBuilderServices fbs = getFlowBuilderServicesBuilder().build();
 		fbs.setApplicationContext(getApplicationContext());
 		fbs.setValidator(validator);
 		return fbs;
-
-	}
+		}
 	@Bean
-	public SecurityFlowExecutionListener securityFlowExecutionListener()
-	{
+	public SecurityFlowExecutionListener securityFlowExecutionListener() {
 		return new SecurityFlowExecutionListener();
-	}
+		}
 }
