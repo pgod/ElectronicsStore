@@ -13,12 +13,13 @@
 		<form:form  modelAttribute="customer" class="form-horizontal" enctype="multipart/form-data">
 			<fieldset>
 				<legend>User details</legend>
-
+				<c:if test="${not empty error}">
+					<div class="alert alert-danger">
+						<spring:message code="userDetails.wrongPassword"/><br />
+					</div>
+				</c:if>
 				<form:errors path="*" cssClass="alert alert-danger" element="div"/>
 
-			
-				
-				
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="name"><spring:message code="editCustomer.form.name.label"/></label>
 					<div class="col-lg-10">
