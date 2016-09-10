@@ -57,7 +57,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	    registry.addResourceHandler("/resource/**").addResourceLocations("/resources/");
 	    }
 	@Bean
-	TilesConfigurer tilesConfigurer() {
+	public TilesConfigurer tilesConfigurer() {
 		TilesConfigurer tiles = new TilesConfigurer();
 		tiles.setDefinitions(new String[] {
 				"/WEB-INF/tiles/definition/tile-definition.xml"
