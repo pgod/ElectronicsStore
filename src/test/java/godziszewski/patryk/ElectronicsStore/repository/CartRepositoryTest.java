@@ -86,7 +86,7 @@ public class CartRepositoryTest {
 		Product iphone = new Product(1, "iPhone", new BigDecimal(1500));
 		
 		cart.addCartItem(new CartItem(iphone));
-		Cart changedCart = new Cart();
+		Cart changedCart = new Cart("1");
 		Product dell = new Product(2, "inspiron", new BigDecimal(2000));
 		changedCart.addCartItem(new CartItem(dell));
 		

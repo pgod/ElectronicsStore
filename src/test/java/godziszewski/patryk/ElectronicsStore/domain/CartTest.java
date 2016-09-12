@@ -16,7 +16,7 @@ public class CartTest {
 	@Before
 	public void setup()
 	{
-		cart = new Cart();
+		cart = new Cart("1");
 	}
 	
 	@Test
