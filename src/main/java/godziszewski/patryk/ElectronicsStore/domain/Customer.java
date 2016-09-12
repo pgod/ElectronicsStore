@@ -65,7 +65,6 @@ public class Customer implements Serializable{
 	@Size(min = 2, max = 10, message = "{Size.Customer.zipCode.validation}")
 	@Column(name = "ZipCode", length = 10)
 	private String zipCode;
-	@NotEmpty(message = "{NotEmpty.Customer.phoneNumber.validation}")
 	@Pattern(regexp="(^$|[0-9]{9})", message = "{Pattern.Customer.phoneNumber.validation}") 
 	@Column(name = "PhoneNumber", nullable = false, length = 15)
 	private String phoneNumber;

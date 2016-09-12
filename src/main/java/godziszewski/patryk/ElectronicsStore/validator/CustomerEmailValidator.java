@@ -21,11 +21,7 @@ public class CustomerEmailValidator implements ConstraintValidator<CustomerEmail
 	@Override
 	public boolean isValid(String email, ConstraintValidatorContext context) {
 		Customer customer;
-		try {
-			customer=customerService.getCustomerByEmail(email);
-		} catch (Exception e) {
-			return true;
-		}
+		customer=customerService.getCustomerByEmail(email);
 		return customer==null;
 	}
 }
