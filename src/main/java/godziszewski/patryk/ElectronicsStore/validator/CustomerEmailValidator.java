@@ -5,7 +5,6 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import godziszewski.patryk.ElectronicsStore.domain.Customer;
 import godziszewski.patryk.ElectronicsStore.service.CustomerService;
 
 public class CustomerEmailValidator implements ConstraintValidator<CustomerEmail, String> {
@@ -20,8 +19,6 @@ public class CustomerEmailValidator implements ConstraintValidator<CustomerEmail
 
 	@Override
 	public boolean isValid(String email, ConstraintValidatorContext context) {
-		Customer customer;
-		customer=customerService.getCustomerByEmail(email);
-		return customer==null;
+		return customerService.getCustomerByEmail(email)==null;
 	}
 }
