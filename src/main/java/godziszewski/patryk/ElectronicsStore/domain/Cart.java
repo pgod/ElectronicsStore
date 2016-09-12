@@ -8,7 +8,7 @@ import java.util.Map;
 public class Cart implements Serializable {
 	private static final long serialVersionUID = 1255835667638846322L;
 	private String cartId;
-	private Map <Integer,CartItem> cartItems = new HashMap<>();;
+	private Map <Integer,CartItem> cartItems = new HashMap<>();
 	private BigDecimal grandTotal = new BigDecimal(0);;
 	public Cart(String cartId)
 	{

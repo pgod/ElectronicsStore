@@ -43,7 +43,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
                 true, true, true, true, getGrantedAuthorities(customer));
 	}
 	 private List<GrantedAuthority> getGrantedAuthorities(Customer customer){
-	        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+	        List<GrantedAuthority> authorities = new ArrayList<>();
 	        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 	        for(String user : admins)
 	        {

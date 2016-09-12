@@ -51,9 +51,9 @@ public class DataBaseConfig {
 	    }
 	@Bean
 	@Autowired
-	public HibernateTransactionManager transactionManager(SessionFactory s) {
+	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
-		txManager.setSessionFactory(s);
+		txManager.setSessionFactory(sessionFactory);
 		return txManager;
 		}
 	@Bean

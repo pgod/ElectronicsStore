@@ -18,7 +18,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import godziszewski.patryk.ElectronicsStore.validator.CustomerEmail;
 import godziszewski.patryk.ElectronicsStore.validator.ValidateOnCreationOnly;
