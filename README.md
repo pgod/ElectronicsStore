@@ -1,6 +1,6 @@
 # ElectronicsStore
 
-Basic and neat webstore, created with Spring MVC with all configuration created in Java config classes.
+Simple and neat webstore, created with Spring MVC with all configuration created in Java config classes.
 
 Technologies used:
 - Spring 4
