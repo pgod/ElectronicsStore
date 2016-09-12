@@ -31,4 +31,4 @@ public class CsrfHeaderFilter extends OncePerRequestFilter {
 	    }
 	    filterChain.doFilter(request, response);
 	  }
-	}
+}

@@ -13,7 +13,7 @@ public class InMemoryCartRepository implements CartRepository {
 	private Map <String, Cart> listOfCarts;
 	
 	public InMemoryCartRepository() {
-		listOfCarts = new HashMap<String, Cart>();
+		listOfCarts = new HashMap<>();
 	}
 
 	public Cart create(Cart cart) {
@@ -47,5 +47,4 @@ public class InMemoryCartRepository implements CartRepository {
 		}
 		listOfCarts.remove(cartId);
 	}
-
 }

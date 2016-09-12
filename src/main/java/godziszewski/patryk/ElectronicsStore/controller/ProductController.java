@@ -30,9 +30,7 @@ import godziszewski.patryk.ElectronicsStore.service.ProductService;
 @Controller
 public class ProductController {
 	
-	
 	private ProductService productService;
-	
 	
 	@Autowired
 	public ProductController(ProductService productService) {
@@ -96,8 +94,6 @@ public class ProductController {
 			throw new RuntimeException("Trial of binding supressed fields: "
 					+StringUtils.arrayToCommaDelimitedString(supressedFields));
 		}
-		
-		
 		productService.addProduct(productToBeAdded);
 		return "redirect:/products";
 	}
@@ -130,8 +126,6 @@ public class ProductController {
 		productService.updateProduct(newProduct);
 		return "redirect:/products";
 	}
-	
-	
 	@InitBinder 
 	public void initialiseBinder(WebDataBinder binder)
 	{
