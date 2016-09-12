@@ -37,7 +37,7 @@ public class Order implements Serializable{
 	@Valid
 	private Customer customer;
 	@OneToMany(mappedBy = "order")
-	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
+	private Set<OrderDetails> orderDetails = new HashSet<>();
 	@DateTimeFormat(pattern="dd/MM/yyyy") 
     @Column(name = "OrderDate", nullable = false)
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")

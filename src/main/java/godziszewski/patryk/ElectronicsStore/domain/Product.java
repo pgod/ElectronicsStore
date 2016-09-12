@@ -66,7 +66,7 @@ public class Product implements Serializable{
 	private boolean discontinued;
 	@JsonIgnore
 	@OneToMany(mappedBy = "product", fetch=FetchType.LAZY)
-	private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
+	private Set<OrderDetails> orderDetails = new HashSet<>();
 	//product images are not stored in database
 	@Transient
 	private MultipartFile productImage;
