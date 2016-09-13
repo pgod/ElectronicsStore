@@ -5,14 +5,14 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import godziszewski.patryk.ElectronicsStore.dao.CartRepository;
+import godziszewski.patryk.ElectronicsStore.dao.CartDao;
 import godziszewski.patryk.ElectronicsStore.model.Cart;
 
 @Repository
-public class InMemoryCartRepository implements CartRepository {
+public class InMemoryCartDao implements CartDao {
 	private Map <String, Cart> listOfCarts;
 	
-	public InMemoryCartRepository() {
+	public InMemoryCartDao() {
 		listOfCarts = new HashMap<>();
 	}
 

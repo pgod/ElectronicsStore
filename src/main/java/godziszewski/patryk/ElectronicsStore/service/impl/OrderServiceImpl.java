@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import godziszewski.patryk.ElectronicsStore.dao.OrderRepository;
+import godziszewski.patryk.ElectronicsStore.dao.OrderDao;
 import godziszewski.patryk.ElectronicsStore.model.Cart;
 import godziszewski.patryk.ElectronicsStore.model.CartItem;
 import godziszewski.patryk.ElectronicsStore.model.Order;
@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private ProductService productService;
 	@Autowired 
-	private OrderRepository orderRepository;
+	private OrderDao orderDao;
 	@Autowired
 	private CartService cartService;
 	@Autowired
@@ -71,6 +71,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order getOrderById(Integer id) {
-		return orderRepository.getOrderById(id);
+		return orderDao.getOrderById(id);
 	}
 }

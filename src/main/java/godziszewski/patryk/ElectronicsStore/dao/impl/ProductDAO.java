@@ -16,10 +16,10 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import godziszewski.patryk.ElectronicsStore.dao.ProductRepository;
+import godziszewski.patryk.ElectronicsStore.dao.ProductDao;
 import godziszewski.patryk.ElectronicsStore.model.Product;
 @Repository
-public class ProductDAO extends AbstractDAO<Integer, Product> implements ProductRepository{
+public class ProductDAO extends AbstractDAO<Integer, Product> implements ProductDao{
 
 	@Override
 	@SuppressWarnings("unchecked")

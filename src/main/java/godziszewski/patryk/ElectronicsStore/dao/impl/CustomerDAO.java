@@ -4,10 +4,10 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import godziszewski.patryk.ElectronicsStore.dao.CustomerRepository;
+import godziszewski.patryk.ElectronicsStore.dao.CustomerDao;
 import godziszewski.patryk.ElectronicsStore.model.Customer;
 @Repository
-public class CustomerDAO extends AbstractDAO<Integer, Customer> implements CustomerRepository {
+public class CustomerDAO extends AbstractDAO<Integer, Customer> implements CustomerDao {
 
 	@Override
 	public Customer getCustomerByEmail(String email) {

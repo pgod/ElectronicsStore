@@ -5,7 +5,7 @@ import java.util.Map;
 
 import godziszewski.patryk.ElectronicsStore.model.Product;
 
-public interface ProductRepository {
+public interface ProductDao {
 	List <Product> getAllProducts();
 	Product getProductById(Integer productId);
 	List <Product> getProductsByCategory(String category);

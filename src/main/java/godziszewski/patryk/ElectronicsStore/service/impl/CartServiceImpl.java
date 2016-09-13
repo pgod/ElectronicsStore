@@ -3,7 +3,7 @@ package godziszewski.patryk.ElectronicsStore.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import godziszewski.patryk.ElectronicsStore.dao.CartRepository;
+import godziszewski.patryk.ElectronicsStore.dao.CartDao;
 import godziszewski.patryk.ElectronicsStore.exception.InvalidCartException;
 import godziszewski.patryk.ElectronicsStore.model.Cart;
 import godziszewski.patryk.ElectronicsStore.service.CartService;
@@ -11,26 +11,26 @@ import godziszewski.patryk.ElectronicsStore.service.CartService;
 @Service
 public class CartServiceImpl implements CartService {
 	@Autowired
-	CartRepository cartRepository;
+	CartDao cartDao;
 	
 	public Cart create(Cart cart) {
-		return cartRepository.create(cart);
+		return cartDao.create(cart);
 	}
 
 	public Cart read(String cartId) {
-		return cartRepository.read(cartId);
+		return cartDao.read(cartId);
 	}
 
 	public void update(String cartId, Cart cart) {
-		cartRepository.update(cartId, cart);
+		cartDao.update(cartId, cart);
 	}
 
 	public void delete(String cartId) {
-		cartRepository.delete(cartId);
+		cartDao.delete(cartId);
 	}
 
 	public Cart validate(String cartId) {
-		Cart cart = cartRepository.read(cartId);
+		Cart cart = cartDao.read(cartId);
 		if(cart==null || cart.getCartItems().size()==0) {
 		throw new InvalidCartException(cartId);
 		}

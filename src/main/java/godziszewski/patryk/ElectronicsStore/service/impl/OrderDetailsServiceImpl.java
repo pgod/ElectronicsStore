@@ -3,7 +3,7 @@ package godziszewski.patryk.ElectronicsStore.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import godziszewski.patryk.ElectronicsStore.dao.OrderDetailsRepository;
+import godziszewski.patryk.ElectronicsStore.dao.OrderDetailsDao;
 import godziszewski.patryk.ElectronicsStore.model.OrderDetails;
 import godziszewski.patryk.ElectronicsStore.service.OrderDetailsService;
 
@@ -11,10 +11,10 @@ import godziszewski.patryk.ElectronicsStore.service.OrderDetailsService;
 public class OrderDetailsServiceImpl implements OrderDetailsService {
 
 	@Autowired
-	private OrderDetailsRepository orderDetailsRepository;
+	private OrderDetailsDao orderDetailsDao;
 	@Override
 	public void save(OrderDetails orderDetails) {
-		orderDetailsRepository.save(orderDetails);
+		orderDetailsDao.save(orderDetails);
 	}
 
 }
