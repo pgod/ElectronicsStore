@@ -14,9 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import godziszewski.patryk.ElectronicsStore.config.RootConfig;
-import godziszewski.patryk.ElectronicsStore.domain.Customer;
-import godziszewski.patryk.ElectronicsStore.domain.Order;
-
+import godziszewski.patryk.ElectronicsStore.model.Customer;
+import godziszewski.patryk.ElectronicsStore.model.Order;
 
 import static org.junit.Assert.*;
 @ActiveProfiles("InMemoryDatabaseDatabase")

@@ -1,6 +1,6 @@
-package godziszewski.patryk.ElectronicsStore.domain.repository;
+package godziszewski.patryk.ElectronicsStore.dao;
 
-import godziszewski.patryk.ElectronicsStore.domain.Cart;
+import godziszewski.patryk.ElectronicsStore.model.Cart;
 
 public interface CartRepository {
 	Cart create(Cart cart);

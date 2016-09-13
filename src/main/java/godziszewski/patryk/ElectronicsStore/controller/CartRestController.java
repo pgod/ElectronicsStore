@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import godziszewski.patryk.ElectronicsStore.domain.Cart;
-import godziszewski.patryk.ElectronicsStore.domain.CartItem;
-import godziszewski.patryk.ElectronicsStore.domain.Product;
 import godziszewski.patryk.ElectronicsStore.exception.ProductNotFoundException;
+import godziszewski.patryk.ElectronicsStore.model.Cart;
+import godziszewski.patryk.ElectronicsStore.model.CartItem;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 import godziszewski.patryk.ElectronicsStore.service.CartService;
 import godziszewski.patryk.ElectronicsStore.service.ProductService;
 

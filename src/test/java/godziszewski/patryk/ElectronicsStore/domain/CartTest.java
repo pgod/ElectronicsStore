@@ -6,9 +6,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import godziszewski.patryk.ElectronicsStore.domain.Cart;
-import godziszewski.patryk.ElectronicsStore.domain.CartItem;
-import godziszewski.patryk.ElectronicsStore.domain.Product;
+import godziszewski.patryk.ElectronicsStore.model.Cart;
+import godziszewski.patryk.ElectronicsStore.model.CartItem;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 
 public class CartTest {
 	private Cart cart;

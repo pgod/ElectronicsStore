@@ -1,6 +1,6 @@
 package godziszewski.patryk.ElectronicsStore.service;
 
-import godziszewski.patryk.ElectronicsStore.domain.Cart;
+import godziszewski.patryk.ElectronicsStore.model.Cart;
 
 public interface CartService {
 	Cart create(Cart cart);

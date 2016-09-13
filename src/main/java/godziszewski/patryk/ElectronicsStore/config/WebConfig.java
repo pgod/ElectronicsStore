@@ -26,7 +26,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.UrlPathHelper;
 
-import godziszewski.patryk.ElectronicsStore.domain.Product;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 
 @Configuration
 @Import(godziszewski.patryk.ElectronicsStore.config.FlowConfiguration.class)

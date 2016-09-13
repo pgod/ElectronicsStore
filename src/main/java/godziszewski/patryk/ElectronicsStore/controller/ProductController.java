@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import godziszewski.patryk.ElectronicsStore.domain.Product;
 import godziszewski.patryk.ElectronicsStore.exception.NoProductsFoundUnderCategoryException;
 import godziszewski.patryk.ElectronicsStore.exception.ProductNotFoundException;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 import godziszewski.patryk.ElectronicsStore.service.ProductService;
 
 @RequestMapping("/products")

@@ -23,7 +23,7 @@ import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
 
-import godziszewski.patryk.ElectronicsStore.domain.Product;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 import godziszewski.patryk.ElectronicsStore.service.ProductService;
 
 public class ProductControllerTest {

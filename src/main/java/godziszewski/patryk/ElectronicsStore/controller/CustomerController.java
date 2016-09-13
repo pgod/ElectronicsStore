@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import godziszewski.patryk.ElectronicsStore.domain.Customer;
+import godziszewski.patryk.ElectronicsStore.model.Customer;
 import godziszewski.patryk.ElectronicsStore.service.CustomerService;
 import godziszewski.patryk.ElectronicsStore.validator.ValidateOnCreationOnly;
 

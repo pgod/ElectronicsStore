@@ -1,4 +1,4 @@
-package godziszewski.patryk.ElectronicsStore.domain.repository.impl;
+package godziszewski.patryk.ElectronicsStore.dao.impl;
 
 import java.io.File;
 import java.util.List;
@@ -16,8 +16,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import godziszewski.patryk.ElectronicsStore.domain.Product;
-import godziszewski.patryk.ElectronicsStore.domain.repository.ProductRepository;
+import godziszewski.patryk.ElectronicsStore.dao.ProductRepository;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 @Repository
 public class ProductDAO extends AbstractDAO<Integer, Product> implements ProductRepository{
 

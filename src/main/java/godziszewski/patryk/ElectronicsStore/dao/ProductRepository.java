@@ -1,9 +1,9 @@
-package godziszewski.patryk.ElectronicsStore.domain.repository;
+package godziszewski.patryk.ElectronicsStore.dao;
 
 import java.util.List;
 import java.util.Map;
 
-import godziszewski.patryk.ElectronicsStore.domain.Product;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 
 public interface ProductRepository {
 	List <Product> getAllProducts();

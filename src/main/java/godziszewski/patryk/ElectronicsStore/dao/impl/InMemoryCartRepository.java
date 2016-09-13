@@ -1,12 +1,12 @@
-package godziszewski.patryk.ElectronicsStore.domain.repository.impl;
+package godziszewski.patryk.ElectronicsStore.dao.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import godziszewski.patryk.ElectronicsStore.domain.Cart;
-import godziszewski.patryk.ElectronicsStore.domain.repository.CartRepository;
+import godziszewski.patryk.ElectronicsStore.dao.CartRepository;
+import godziszewski.patryk.ElectronicsStore.model.Cart;
 
 @Repository
 public class InMemoryCartRepository implements CartRepository {

@@ -1,6 +1,6 @@
-package godziszewski.patryk.ElectronicsStore.domain.repository;
+package godziszewski.patryk.ElectronicsStore.dao;
 
-import godziszewski.patryk.ElectronicsStore.domain.Customer;
+import godziszewski.patryk.ElectronicsStore.model.Customer;
 
 public interface CustomerRepository {
 	Customer getCustomerByEmail(String email);

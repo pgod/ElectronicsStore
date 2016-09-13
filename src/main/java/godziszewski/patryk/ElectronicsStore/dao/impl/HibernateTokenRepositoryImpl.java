@@ -1,4 +1,4 @@
-package godziszewski.patryk.ElectronicsStore.domain.repository.impl;
+package godziszewski.patryk.ElectronicsStore.dao.impl;
 
 import java.util.Date;
 
@@ -10,7 +10,8 @@ import org.springframework.security.web.authentication.rememberme.PersistentReme
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import godziszewski.patryk.ElectronicsStore.domain.PersistentLogin;
+
+import godziszewski.patryk.ElectronicsStore.model.PersistentLogin;
 
 @Repository
 @Transactional

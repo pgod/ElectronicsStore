@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import freemarker.template.Configuration;
-import godziszewski.patryk.ElectronicsStore.domain.Order;
+import godziszewski.patryk.ElectronicsStore.model.Order;
 import godziszewski.patryk.ElectronicsStore.service.MailService;
 
 @Service

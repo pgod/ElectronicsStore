@@ -1,11 +1,11 @@
-package godziszewski.patryk.ElectronicsStore.domain.repository.impl;
+package godziszewski.patryk.ElectronicsStore.dao.impl;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import godziszewski.patryk.ElectronicsStore.domain.Customer;
-import godziszewski.patryk.ElectronicsStore.domain.repository.CustomerRepository;
+import godziszewski.patryk.ElectronicsStore.dao.CustomerRepository;
+import godziszewski.patryk.ElectronicsStore.model.Customer;
 @Repository
 public class CustomerDAO extends AbstractDAO<Integer, Customer> implements CustomerRepository {
 
