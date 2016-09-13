@@ -1,4 +1,4 @@
-package godziszewski.patryk.ElectronicsStore.domain;
+package godziszewski.patryk.ElectronicsStore.model;
 
 import java.io.Serializable;
 import java.util.Set;

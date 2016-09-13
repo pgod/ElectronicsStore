@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import godziszewski.patryk.ElectronicsStore.domain.Product;
-import godziszewski.patryk.ElectronicsStore.domain.repository.ProductRepository;
+import godziszewski.patryk.ElectronicsStore.dao.ProductRepository;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 import godziszewski.patryk.ElectronicsStore.service.ProductService;
 
 @Service

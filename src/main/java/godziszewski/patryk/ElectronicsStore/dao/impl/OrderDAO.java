@@ -1,9 +1,9 @@
-package godziszewski.patryk.ElectronicsStore.domain.repository.impl;
+package godziszewski.patryk.ElectronicsStore.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import godziszewski.patryk.ElectronicsStore.domain.Order;
-import godziszewski.patryk.ElectronicsStore.domain.repository.OrderRepository;
+import godziszewski.patryk.ElectronicsStore.dao.OrderRepository;
+import godziszewski.patryk.ElectronicsStore.model.Order;
 
 @Repository
 public class OrderDAO extends AbstractDAO<Integer, Order> implements OrderRepository {

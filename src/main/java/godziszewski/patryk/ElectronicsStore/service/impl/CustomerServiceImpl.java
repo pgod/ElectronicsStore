@@ -6,9 +6,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import godziszewski.patryk.ElectronicsStore.domain.Customer;
-import godziszewski.patryk.ElectronicsStore.domain.repository.CustomerRepository;
+import godziszewski.patryk.ElectronicsStore.dao.CustomerRepository;
 import godziszewski.patryk.ElectronicsStore.exception.CustomerNotFoundException;
+import godziszewski.patryk.ElectronicsStore.model.Customer;
 import godziszewski.patryk.ElectronicsStore.service.CustomerService;
 
 @Service

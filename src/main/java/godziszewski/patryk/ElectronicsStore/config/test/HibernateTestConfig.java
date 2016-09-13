@@ -25,7 +25,7 @@ public class HibernateTestConfig {
 	public LocalSessionFactoryBean sessionFactory() {
        LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
        factoryBean.setDataSource(dataSource());
-       factoryBean.setPackagesToScan("godziszewski.patryk.ElectronicsStore.domain");
+       factoryBean.setPackagesToScan("godziszewski.patryk.ElectronicsStore.model");
        factoryBean.setHibernateProperties(hibernateProperties());
        return factoryBean;
        }

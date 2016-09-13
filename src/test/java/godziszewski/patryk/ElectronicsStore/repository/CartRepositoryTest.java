@@ -10,10 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import godziszewski.patryk.ElectronicsStore.config.RootConfig;
-import godziszewski.patryk.ElectronicsStore.domain.Cart;
-import godziszewski.patryk.ElectronicsStore.domain.CartItem;
-import godziszewski.patryk.ElectronicsStore.domain.Product;
-import godziszewski.patryk.ElectronicsStore.domain.repository.CartRepository;
+import godziszewski.patryk.ElectronicsStore.dao.CartRepository;
+import godziszewski.patryk.ElectronicsStore.model.Cart;
+import godziszewski.patryk.ElectronicsStore.model.CartItem;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

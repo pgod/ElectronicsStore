@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import godziszewski.patryk.ElectronicsStore.domain.Cart;
-import godziszewski.patryk.ElectronicsStore.domain.CartItem;
-import godziszewski.patryk.ElectronicsStore.domain.Order;
-import godziszewski.patryk.ElectronicsStore.domain.OrderDetails;
-import godziszewski.patryk.ElectronicsStore.domain.Product;
-import godziszewski.patryk.ElectronicsStore.domain.repository.OrderRepository;
+import godziszewski.patryk.ElectronicsStore.dao.OrderRepository;
+import godziszewski.patryk.ElectronicsStore.model.Cart;
+import godziszewski.patryk.ElectronicsStore.model.CartItem;
+import godziszewski.patryk.ElectronicsStore.model.Order;
+import godziszewski.patryk.ElectronicsStore.model.OrderDetails;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 import godziszewski.patryk.ElectronicsStore.service.CartService;
 import godziszewski.patryk.ElectronicsStore.service.OrderDetailsService;
 import godziszewski.patryk.ElectronicsStore.service.OrderService;

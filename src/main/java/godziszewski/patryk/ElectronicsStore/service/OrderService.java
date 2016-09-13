@@ -1,6 +1,6 @@
 package godziszewski.patryk.ElectronicsStore.service;
 
-import godziszewski.patryk.ElectronicsStore.domain.Order;
+import godziszewski.patryk.ElectronicsStore.model.Order;
 
 public interface OrderService {
 	void checkQuantity(Order order);

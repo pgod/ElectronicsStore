@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://www.springframework.org/schema/webflow 
   http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-	<var name="order" class="godziszewski.patryk.ElectronicsStore.domain.Order" />
+	<var name="order" class="godziszewski.patryk.ElectronicsStore.model.Order" />
 	
 	<action-state id="addCartToOrder">
 		<secured attributes="ROLE_USER" />

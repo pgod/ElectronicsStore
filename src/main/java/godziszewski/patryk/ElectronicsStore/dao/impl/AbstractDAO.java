@@ -1,4 +1,4 @@
-package godziszewski.patryk.ElectronicsStore.domain.repository.impl;
+package godziszewski.patryk.ElectronicsStore.dao.impl;
 
 import java.io.Serializable;
 

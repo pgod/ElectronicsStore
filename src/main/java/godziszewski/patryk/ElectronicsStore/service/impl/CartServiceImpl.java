@@ -3,9 +3,9 @@ package godziszewski.patryk.ElectronicsStore.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import godziszewski.patryk.ElectronicsStore.domain.Cart;
-import godziszewski.patryk.ElectronicsStore.domain.repository.CartRepository;
+import godziszewski.patryk.ElectronicsStore.dao.CartRepository;
 import godziszewski.patryk.ElectronicsStore.exception.InvalidCartException;
+import godziszewski.patryk.ElectronicsStore.model.Cart;
 import godziszewski.patryk.ElectronicsStore.service.CartService;
 
 @Service

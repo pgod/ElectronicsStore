@@ -15,8 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import godziszewski.patryk.ElectronicsStore.domain.Customer;
 import godziszewski.patryk.ElectronicsStore.exception.CustomerNotFoundException;
+import godziszewski.patryk.ElectronicsStore.model.Customer;
 import godziszewski.patryk.ElectronicsStore.service.CustomerService;
 
 @Service

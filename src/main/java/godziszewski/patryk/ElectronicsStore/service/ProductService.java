@@ -3,7 +3,7 @@ package godziszewski.patryk.ElectronicsStore.service;
 import java.util.List;
 import java.util.Map;
 
-import godziszewski.patryk.ElectronicsStore.domain.Product;
+import godziszewski.patryk.ElectronicsStore.model.Product;
 
 public interface ProductService {
 	List <Product> getAllProducts();
