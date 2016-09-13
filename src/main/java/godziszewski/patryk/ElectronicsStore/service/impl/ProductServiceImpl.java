@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import godziszewski.patryk.ElectronicsStore.dao.ProductRepository;
+import godziszewski.patryk.ElectronicsStore.dao.ProductDao;
 import godziszewski.patryk.ElectronicsStore.model.Product;
 import godziszewski.patryk.ElectronicsStore.service.ProductService;
 
@@ -16,25 +16,25 @@ import godziszewski.patryk.ElectronicsStore.service.ProductService;
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
-	ProductRepository productRepository;
+	ProductDao productDao;
 	public List<Product> getAllProducts() {
-		return productRepository.getAllProducts();
+		return productDao.getAllProducts();
 	}
 	public Product getProductById(Integer productId) {
-		return productRepository.getProductById(productId);
+		return productDao.getProductById(productId);
 	}
 	public List<Product> getProductsByCategory(String category) {
-		return productRepository.getProductsByCategory(category);
+		return productDao.getProductsByCategory(category);
 	}
 	public 	List <Product> getProductsByFilter(Map<String, List<String>> filterParams) {
-		return productRepository.getProductsByFilter(filterParams);
+		return productDao.getProductsByFilter(filterParams);
 	}
 	public void addProduct(Product product) {
-		productRepository.addProduct(product);
+		productDao.addProduct(product);
 	}
 	@Override
 	public void updateProduct(Product product) {
-		Product p = productRepository.getProductById(product.getProductId());
+		Product p = productDao.getProductById(product.getProductId());
         if(p!=null){
             p.setName(product.getName());
             p.setUnitPrice(product.getUnitPrice());

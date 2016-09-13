@@ -6,7 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import godziszewski.patryk.ElectronicsStore.dao.CustomerRepository;
+import godziszewski.patryk.ElectronicsStore.dao.CustomerDao;
 import godziszewski.patryk.ElectronicsStore.exception.CustomerNotFoundException;
 import godziszewski.patryk.ElectronicsStore.model.Customer;
 import godziszewski.patryk.ElectronicsStore.service.CustomerService;
@@ -18,19 +18,19 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	private final CustomerRepository customerRepository;
+	private final CustomerDao customerDao;
 	@Autowired
-	 public CustomerServiceImpl(CustomerRepository customerRepository) {
-		 this.customerRepository=customerRepository;
+	 public CustomerServiceImpl(CustomerDao customerDao) {
+		 this.customerDao=customerDao;
 	}
 	
 	@Override
 	public Customer getCustomerByEmail(String email) {
-		return customerRepository.getCustomerByEmail(email);
+		return customerDao.getCustomerByEmail(email);
 	}
 	@Override
 	public void update(Customer customer) {
-		Customer entity = customerRepository.getCustomerByEmail(customer.getEmail());
+		Customer entity = customerDao.getCustomerByEmail(customer.getEmail());
         if(entity == null)
         {
         	throw new CustomerNotFoundException(customer.getEmail());
@@ -51,17 +51,17 @@ public class CustomerServiceImpl implements CustomerService {
 	public void create(Customer customer) {
 		 customer.setPassword(passwordEncoder
 				 .encode(customer.getPassword()));
-		 customerRepository.save(customer);
+		 customerDao.save(customer);
 	}
 
 	@Override
 	public Customer getCustomerById(Integer id) {
-		return customerRepository.getCustomerById(id);
+		return customerDao.getCustomerById(id);
 	}
 
 	@Override
 	public void updateAddressDetails(Customer customer) {
-		Customer entity = customerRepository.getCustomerByEmail(customer.getEmail());
+		Customer entity = customerDao.getCustomerByEmail(customer.getEmail());
         if(entity == null)
         {
         	throw new CustomerNotFoundException(customer.getEmail());
